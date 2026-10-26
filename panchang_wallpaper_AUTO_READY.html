@@ -1,0 +1,248 @@
+<!DOCTYPE html>
+<html lang="gu">
+<head>
+<meta charset="utf-8">
+<title>ગુજરાતી પંચાંગ વૉલપેપર</title>
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<link href="https://fonts.googleapis.com/css2?family=Hind+Vadodara:wght@400;500;600;700&family=Shrikhand&display=swap" rel="stylesheet">
+<style>
+:root{--left:20vw;--gold:#f5b942;--kum:#e2334a;--cream:#fff3dc;--mut:#cdbddf;--good:#86e29b;--bad:#ff8585}
+*{box-sizing:border-box;margin:0;padding:0}
+html{font-size:min(.8333vw,1.4815vh)}
+body{width:100vw;height:100vh;overflow:hidden;color:var(--cream);
+ font-family:'Hind Vadodara','Noto Sans Gujarati','Nirmala UI','Shruti',sans-serif;
+ background:radial-gradient(60rem 36rem at 90% 0,#3d1757 0,transparent 62%),radial-gradient(50rem 34rem at 15% 105%,#5c1233 0,transparent 62%),#150c28}
+.strip{position:absolute;left:var(--left);right:0;height:1rem;background:radial-gradient(circle,var(--gold) 0 .22rem,transparent .26rem) 0 0/1.4rem 1rem,linear-gradient(var(--kum),var(--kum)) 0 50%/100% .18rem no-repeat}
+.strip.t{top:0}.strip.b{bottom:0}
+#app{position:absolute;inset:0;left:var(--left);padding:1.7rem 2.2rem 1.5rem 1.4rem;display:grid;grid-template-rows:auto 1fr auto;gap:1rem}
+.head{display:grid;grid-template-columns:auto 1fr;gap:3.2rem;align-items:center}
+.clock{display:flex;align-items:baseline;gap:.9rem}
+.clock .t{font-size:8.6rem;font-weight:700;line-height:1;color:var(--gold);letter-spacing:.02em}
+.clock .s{font-size:3rem;color:var(--kum);font-weight:600}
+.clock .p{font-size:2.2rem;color:var(--mut)}
+.date .big{font-family:'Shrikhand','Hind Vadodara',sans-serif;font-size:5rem;line-height:1.25}
+.date .sub{font-size:2.2rem;font-weight:500}
+.date .sam{font-size:2rem;color:var(--gold);font-weight:600}
+.main{display:grid;grid-template-columns:1.05fr .9fr 1.15fr;gap:1rem;min-height:0}
+.card{background:rgba(255,236,200,.06);border:1px solid rgba(245,185,66,.3);border-radius:1.1rem;padding:1rem 1.2rem;display:flex;flex-direction:column;min-height:0;overflow:hidden}
+.card h2{font-size:1.9rem;color:var(--gold);font-weight:700;margin-bottom:.5rem}
+.cal{flex:1;display:grid;grid-template-columns:repeat(7,1fr);gap:.22rem;min-height:0}
+.cal .w{text-align:center;font-size:1.25rem;font-weight:700;color:var(--mut)}
+.cal .w:first-child,.cal .d:nth-child(7n+1){color:var(--bad)}
+.d{border-radius:.55rem;text-align:center;padding:.1rem 0;display:flex;flex-direction:column;justify-content:center;background:rgba(255,255,255,.035);position:relative;min-height:0}
+.d b{font-size:1.85rem;line-height:1.1;font-weight:600}
+.d i{font-style:normal;font-size:1.05rem;color:var(--mut);line-height:1.1}
+.d.pu{background:rgba(245,185,66,.2)}.d.am{background:rgba(120,90,200,.3)}.d.ek i{color:var(--good);font-weight:600}
+.d.fe::after{content:"";position:absolute;top:.3rem;right:.35rem;width:.6rem;height:.6rem;border-radius:50%;background:var(--kum)}
+.d.td{background:var(--kum);outline:.18rem solid var(--gold)}.d.td i{color:#fff}
+.leg{font-size:1.05rem;color:var(--mut);margin-top:.4rem}
+.row{display:flex;justify-content:space-between;align-items:baseline;gap:1rem;padding:.42rem 0;border-bottom:1px solid rgba(245,185,66,.16)}
+.row:last-child{border:0}
+.row span{font-size:1.25rem;color:var(--mut);white-space:nowrap}
+.row b{font-size:1.65rem;font-weight:600;text-align:right;line-height:1.15}
+.row b small{display:block;font-size:1.15rem;color:var(--gold);font-weight:500}
+.cg{display:grid;grid-template-columns:1fr 1fr;gap:1rem;flex:1;min-height:0}
+.cg h3{font-size:1.35rem;color:var(--mut);margin-bottom:.3rem}
+.sl{display:flex;justify-content:space-between;align-items:center;padding:.18rem .6rem;margin-bottom:.22rem;border-radius:.5rem;font-size:1.3rem;font-weight:600;border-left:.4rem solid}
+.sl em{font-style:normal;font-size:1.1rem;font-weight:500;color:var(--cream);opacity:.9}
+.sl.g{background:rgba(134,226,155,.13);border-color:var(--good)}
+.sl.n{background:rgba(255,133,133,.12);border-color:var(--bad)}
+.sl.now{outline:.17rem solid var(--gold);background:rgba(245,185,66,.28)}
+.foot{display:grid;grid-template-columns:1fr auto;gap:1rem}
+.fest{display:flex;gap:.9rem}
+.fi{flex:1;min-width:0}
+.fi b{display:block;font-size:1.25rem;color:var(--gold)}
+.fi span{font-size:1.5rem;font-weight:600;line-height:1.2;display:block}
+.plate{background:linear-gradient(135deg,var(--kum),#8e1b45);border-radius:1.1rem;padding:.9rem 1.8rem;display:flex;flex-direction:column;justify-content:center;border:1px solid var(--gold)}
+.plate b{font-size:2.3rem;letter-spacing:.05em;color:#fff}
+.plate span{font-size:2.7rem;color:var(--gold);font-weight:700;letter-spacing:.06em}
+</style>
+</head>
+<body>
+<script>
+/* LICENSE GUARD v2  */
+var H=function H(s,seed){seed=seed||0;var a=0xdeadbeef^seed,b=0x41c6ce57^seed,c,i;for(i=0;i<s.length;i++){c=s.charCodeAt(i);a=Math.imul(a^c,2654435761);b=Math.imul(b^c,1597334677)}
+a=Math.imul(a^(a>>>16),2246822507)^Math.imul(b^(b>>>13),3266489909);b=Math.imul(b^(b>>>16),2246822507)^Math.imul(a^(a>>>13),3266489909);return 4294967296*(2097151&b)+(a>>>0)};
+(function guardMain(c,H){
+ var K='lic2_'+c.t,DB=(c.db||'').replace(/\/+$/,'');
+ function hex(n){return n.toString(16).toUpperCase().padStart(14,'0')}
+ function td(){var d=new Date();return ''+d.getFullYear()+('0'+(d.getMonth()+1)).slice(-2)+('0'+d.getDate()).slice(-2)}
+ function good(v){if(typeof v!=='string')return false;var p=v.split('|');return p[0]==='1'&&(p[1]==='00000000'||td()<=p[1])}
+ function code(){var u=navigator.userAgent,f=/Edg\//.test(u)?'edge':/OPR\//.test(u)?'opera':/Firefox\//.test(u)?'ff':/Chrome\//.test(u)?'chrome':/Safari\//.test(u)?'safari':'x',g='';
+  try{var x=document.createElement('canvas').getContext('webgl'),e=x.getExtension('WEBGL_debug_renderer_info');g=x.getParameter(e.UNMASKED_RENDERER_WEBGL)}catch(e){}
+  return hex(H([f,navigator.platform,navigator.hardwareConcurrency||0,g].join('|'),7)).slice(0,12).match(/.{4}/g).join('-')}
+ var cd=code(),id=c.t+'_'+cd;
+ function ask(){return fetch(DB+'/approved/'+id+'/v.json?t='+Date.now(),{cache:'no-store'}).then(function(r){if(!r.ok)throw 0;return r.json()})}
+ function cache(){try{return localStorage.getItem(K)}catch(e){return null}}
+ function put(v){try{v?localStorage.setItem(K,v):localStorage.removeItem(K)}catch(e){}}
+ function watch(){setInterval(function(){ask().then(function(v){if(good(v))put(v);else{put(null);location.reload()}}).catch(function(){})},60000)}
+ function lock(){
+  var o=document.createElement('div');o.id='__lic';
+  o.style.cssText='position:fixed;inset:0;z-index:2147483647;background:radial-gradient(circle at 30% 20%,#2a1f6b,#070b1a 70%);display:flex;align-items:center;justify-content:center;padding:18px;font-family:sans-serif;color:#eef1ff';
+  o.innerHTML='<style>@keyframes lp{from{opacity:0;transform:scale(.88)}}@keyframes lr{to{transform:rotate(360deg)}}@keyframes lb{50%{opacity:.3}}#__lic button{font:inherit;border-radius:12px;padding:12px;border:1px solid rgba(255,255,255,.2)}</style><div style="width:min(480px,100%);text-align:center;padding:30px;border-radius:24px;background:rgba(255,255,255,.07);border:1px solid rgba(255,255,255,.18);backdrop-filter:blur(14px);animation:lp .6s cubic-bezier(.2,1.3,.4,1)"><div style="font-size:54px;display:inline-block;animation:lr 6s linear infinite">🔒</div><h2 style="margin:10px 0 6px">આ ટૂલ લોક છે</h2><p style="color:#97a0c7;line-height:1.6;font-size:.95rem">આ ટૂલ વાપરવા માટે નીચેનો Access Code મોકલીને Activation મેળવો.<br><b style="color:#ffb938">SHRI ANANDBHAI MODI · '+c.p+'</b></p><div style="margin:16px 0 6px;font-size:.8rem;color:#97a0c7">તમારો Access Code</div><div style="padding:12px;border-radius:12px;background:rgba(0,0,0,.4);border:1px dashed #2de2c4;color:#2de2c4;font-size:1.25rem;letter-spacing:2px">'+cd+'</div><div style="display:flex;gap:8px;margin:12px 0;justify-content:center;flex-wrap:wrap"><button id="__cp" style="background:#1d2447;color:#fff;cursor:pointer">📋 Copy</button><a target="_blank" href="https://wa.me/91'+c.p+'?text='+encodeURIComponent('Activation જોઈએ છે. ટૂલ: '+c.n+' | Access Code: '+cd)+'" style="background:#25d366;color:#052;padding:12px 16px;border-radius:12px;text-decoration:none;font-weight:600">WhatsApp</a></div><div id="__s" style="color:#ffd990;font-size:.9rem;margin-top:6px"><span style="animation:lb 1.4s infinite;display:inline-block">⏳</span> Activation ની રાહ જુઓ… થતાં જ આ ટૂલ આપોઆપ ખૂલી જશે</div></div>';
+  document.documentElement.appendChild(o);document.documentElement.style.overflow='hidden';
+  o.querySelector('#__cp').onclick=function(){navigator.clipboard&&navigator.clipboard.writeText(cd);this.textContent='✔ Copied'};
+  if(/__FIREBASE/.test(DB)||!DB)o.querySelector('#__s').textContent='⚠ Admin ની Database URL સેટ નથી.';
+  var iv=setInterval(function(){ask().then(function(v){if(good(v)){put(v);window.__licOK=1;clearInterval(iv);o.remove();document.documentElement.style.overflow='';watch()}}).catch(function(){})},3000);
+  setInterval(function(){if(!document.getElementById('__lic')&&!window.__licOK)location.reload()},1000)}
+ function run(){if(good(cache())){window.__licOK=1;watch();return}lock()}
+ if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',run);else run();
+})({"t": "panchang", "n": "ગુજરાતી પંચાંગ વૉલપેપર", "p": "9427914014", "db": "https://anand-tools-default-rtdb.asia-southeast1.firebasedatabase.app"},H);
+</script>
+
+<div class="strip t"></div><div class="strip b"></div>
+<div id="app">
+ <div class="head">
+  <div class="clock"><span class="t" id="ck"></span><span class="s" id="cs"></span><span class="p" id="cp"></span></div>
+  <div class="date"><div class="big" id="gd"></div><div class="sub" id="dd"></div><div class="sam" id="vs"></div></div>
+ </div>
+ <div class="main">
+  <div class="card"><h2 id="cm"></h2><div class="cal" id="cal"></div>
+   <div class="leg">લાલ ટપકું = તહેવાર &nbsp; સોનેરી = પૂનમ &nbsp; જાંબલી = અમાસ &nbsp; લીલી = અગિયારસ</div></div>
+  <div class="card"><h2>આજનું પંચાંગ</h2><div id="pg"></div></div>
+  <div class="card"><h2>ચોઘડિયાં</h2><div class="cg"><div><h3>દિવસ</h3><div id="cd"></div></div><div><h3>રાત્રિ</h3><div id="cn"></div></div></div></div>
+ </div>
+ <div class="foot">
+  <div class="card"><h2>આવનારા તહેવારો</h2><div class="fest" id="fs"></div></div>
+  <div class="plate"><b>SHRI ANANDBHAI MODI</b><span>9427914014</span></div>
+ </div>
+</div>
+<script>
+//ENGINE_START
+const RAD=Math.PI/180, ISTO=19800e3, LAT=23.0225, LON=72.5714;
+const g=n=>String(n).replace(/\d/g,d=>'૦૧૨૩૪૫૬૭૮૯'[d]);
+const jd=ms=>ms/86400000+2440587.5;
+const norm=x=>((x%360)+360)%360;
+const sn=d=>Math.sin(d*RAD);
+const Tc=ms=>(jd(ms)-2451545)/36525;
+function sunLon(ms){const T=Tc(ms);const L0=280.46646+36000.76983*T+0.0003032*T*T;const M=357.52911+35999.05029*T-0.0001537*T*T;
+ const C=(1.914602-0.004817*T-0.000014*T*T)*sn(M)+(0.019993-0.000101*T)*sn(2*M)+0.000289*sn(3*M);
+ return norm(L0+C-0.00569-0.00478*sn(125.04-1934.136*T));}
+const MT=[[0,0,1,0,6288774],[2,0,-1,0,1274027],[2,0,0,0,658314],[0,0,2,0,213618],[0,1,0,0,-185116],[0,0,0,2,-114332],[2,0,-2,0,58793],[2,-1,-1,0,57066],[2,0,1,0,53322],[2,-1,0,0,45758],[0,1,-1,0,-40923],[1,0,0,0,-34720],[0,1,1,0,-30383],[2,0,0,-2,15327],[0,0,1,2,-12528],[0,0,1,-2,10980],[4,0,-1,0,10675],[0,0,3,0,10034],[4,0,-2,0,8548],[2,1,-1,0,-7888],[2,1,0,0,-6766],[1,0,-1,0,-5163],[1,1,0,0,4987],[2,-1,1,0,4036],[2,0,2,0,3994],[4,0,0,0,3861],[2,0,-3,0,3665],[0,1,-2,0,-2689],[2,0,-1,2,-2602],[2,-1,-2,0,2390],[1,0,1,0,-2348],[2,-2,0,0,2236],[0,1,2,0,-2120],[0,2,0,0,-2069],[2,-2,-1,0,2048],[2,0,1,-2,-1773],[2,0,0,2,-1595],[4,-1,-1,0,1215],[0,0,2,2,-1110]];
+function moonLon(ms){const T=Tc(ms),T2=T*T;
+ const Lp=norm(218.3164477+481267.88123421*T-0.0015786*T2),D=norm(297.8501921+445267.1114034*T-0.0018819*T2),
+ M=norm(357.5291092+35999.0502909*T-0.0001536*T2),Mp=norm(134.9633964+477198.8675055*T+0.0087414*T2),F=norm(93.272095+483202.0175233*T-0.0036539*T2);
+ const E=1-0.002516*T-0.0000074*T2;let s=0;
+ for(const [d,m,mp,f,c] of MT){const e=Math.abs(m)==1?E:Math.abs(m)==2?E*E:1;s+=c*e*sn(d*D+m*M+mp*Mp+f*F);}
+ s+=3958*sn(119.75+131.849*T)+1962*sn(Lp-F)+318*sn(53.09+479264.29*T);
+ return norm(Lp+s/1e6);}
+const ayan=ms=>23.85306+1.396971*Tc(ms);
+const elong=ms=>norm(moonLon(ms)-sunLon(ms));
+const tithiIdx=ms=>Math.floor(elong(ms)/12);
+const karanIdx=ms=>Math.floor(elong(ms)/6);
+const nakIdx=ms=>Math.floor(norm(moonLon(ms)-ayan(ms))/(360/27));
+const yogaIdx=ms=>Math.floor(norm(sunLon(ms)+moonLon(ms)-2*ayan(ms))/(360/27));
+function nextChange(fn,t0){const v=fn(t0);let a=t0,b=t0;
+ for(let i=0;i<500;i++){b=a+9e5;if(fn(b)!==v)break;a=b;}
+ for(let i=0;i<24;i++){const m=(a+b)/2;if(fn(m)===v)a=m;else b=m;}
+ return b;}
+function refineNM(t){for(let i=0;i<6;i++){const s=((elong(t)+180)%360)-180;t-=s/12.19*864e5;}return t;}
+function prevNM(ms){return refineNM(ms-elong(ms)/12.19*864e5-3600e3*0);}
+function lunar(ms){const nm=prevNM(ms),nn=refineNM(nm+29.53*864e5);
+ const r0=Math.floor(norm(sunLon(nm)-ayan(nm))/30),r1=Math.floor(norm(sunLon(nn)-ayan(nn))/30);
+ return {m:(r0+1)%12,adhik:r0===r1};}
+function sunTimes(utcMid){const t=utcMid+7.16*3600e3,T=Tc(t),lam=sunLon(t),eps=23.4393-0.013*T;
+ const dec=Math.asin(sn(eps)*sn(lam))/RAD,al=Math.atan2(Math.cos(eps*RAD)*sn(lam),Math.cos(lam*RAD))/RAD;
+ const L0=norm(280.46646+36000.76983*T);let e=norm(L0-0.0057183-norm(al));if(e>180)e-=360;const eot=4*e;
+ const noon=utcMid+(720-4*LON-eot)*60000;
+ const H=Math.acos((sn(-0.833)-sn(LAT)*sn(dec))/(Math.cos(LAT*RAD)*Math.cos(dec*RAD)))/RAD;
+ return {rise:noon-4*H*60000,set:noon+4*H*60000};}
+function parts(ms){const x=new Date(ms+ISTO);return{y:x.getUTCFullYear(),m:x.getUTCMonth(),d:x.getUTCDate(),h:x.getUTCHours(),mi:x.getUTCMinutes(),s:x.getUTCSeconds(),wd:x.getUTCDay()};}
+const MON=['ચૈત્ર','વૈશાખ','જેઠ','અષાઢ','શ્રાવણ','ભાદરવો','આસો','કારતક','માગશર','પોષ','મહા','ફાગણ'];
+const TN=['એકમ','બીજ','ત્રીજ','ચોથ','પાંચમ','છઠ્ઠ','સાતમ','આઠમ','નોમ','દશમ','અગિયારસ','બારસ','તેરસ','ચૌદસ'];
+const tName=t=>t===14?'પૂનમ':t===29?'અમાસ':TN[t%15];
+const pk=t=>t<15?'સુદ':'વદ';
+// [lunar month, tithi(0-based: sud n=n-1, vad n=14+n), when S=sunrise M=midday A=afternoon E=evening N=midnight, name]
+const FEST=[[0,0,'S','ચૈત્ર નવરાત્રિ / ગુડી પડવો'],[0,8,'S','રામ નવમી'],[0,12,'S','મહાવીર જયંતી'],[0,14,'S','હનુમાન જયંતી'],
+[1,2,'S','અક્ષય તૃતીયા'],[1,14,'S','બુદ્ધ પૂર્ણિમા'],[2,10,'S','નિર્જલા એકાદશી'],[2,14,'S','વટ સાવિત્રી પૂનમ'],
+[3,1,'S','રથયાત્રા'],[3,10,'S','દેવશયની એકાદશી'],[3,14,'S','ગુરુ પૂર્ણિમા'],[3,29,'S','દિવાસો'],
+[4,14,'S','રક્ષાબંધન'],[4,19,'S','નાગ પાંચમ'],[4,20,'S','રાંધણ છઠ્ઠ'],[4,21,'S','શીતળા સાતમ'],[4,22,'S','જન્માષ્ટમી'],
+[5,3,'M','ગણેશ ચતુર્થી'],[5,13,'S','અનંત ચતુર્દશી'],[5,29,'S','સર્વપિતૃ અમાસ'],
+[6,0,'S','નવરાત્રિ પ્રારંભ'],[6,7,'S','દુર્ગાષ્ટમી'],[6,9,'A','વિજયાદશમી (દશેરા)'],[6,14,'E','શરદ પૂનમ'],
+[6,26,'E','વાઘ બારસ'],[6,27,'E','ધનતેરસ'],[6,28,'E','કાળી ચૌદસ'],[6,29,'E','દિવાળી'],
+[7,0,'S','નૂતન વર્ષ (બેસતું વર્ષ)'],[7,1,'S','ભાઈબીજ'],[7,4,'S','લાભ પાંચમ'],[7,10,'S','દેવ ઊઠી એકાદશી'],[7,14,'S','કાર્તિક પૂર્ણિમા'],
+[8,10,'S','ગીતા જયંતી'],[10,4,'S','વસંત પંચમી'],[10,28,'N','મહાશિવરાત્રિ'],[11,14,'E','હોળી']];
+const FIXED={'1-14':'ઉત્તરાયણ','1-15':'વાસી ઉત્તરાયણ','1-26':'પ્રજાસત્તાક દિન','4-14':'આંબેડકર જયંતી','5-1':'ગુજરાત સ્થાપના દિન','8-15':'સ્વતંત્રતા દિન','10-2':'ગાંધી જયંતી','10-31':'સરદાર પટેલ જયંતી','12-25':'નાતાલ'};
+const cache={};
+function dayData(y,m,d){const k=y*10000+m*100+d;if(cache[k])return cache[k];
+ const a=sunTimes(Date.UTC(y,m,d)),b=sunTimes(Date.UTC(y,m,d+1));
+ const L=a.set-a.rise,mom={S:a.rise,M:a.rise+.5*L,A:a.rise+.7*L,E:a.set+36e5,N:a.set+(b.rise-a.set)/2},tt={},ll={};
+ for(const w in mom){tt[w]=tithiIdx(mom[w]);ll[w]=lunar(mom[w]);}
+ const ksh=tithiIdx(b.rise)===(tt.S+2)%30?(tt.S+1)%30:-1,fest=[];
+ for(const f of FEST){const l=ll[f[2]];if(!l.adhik&&l.m===f[0]&&(tt[f[2]]===f[1]||(f[2]==='S'&&ksh===f[1])))fest.push(f[3]);}
+ {const q=sunTimes(Date.UTC(y,m,d-1)),e=q.set+36e5,l=lunar(e);if(!l.adhik&&l.m===11&&tithiIdx(e)===14)fest.push('ધુળેટી');}
+ const fx=FIXED[(m+1)+'-'+d];if(fx)fest.push(fx);
+ return cache[k]={t:tt.S,lm:ll.S,fest,rise:a.rise,set:a.set,nrise:b.rise};}
+//ENGINE_END
+function fests(y,m,d){const x=new Date(Date.UTC(y,m,d-1)),pv=dayData(x.getUTCFullYear(),x.getUTCMonth(),x.getUTCDate()).fest;return dayData(y,m,d).fest.filter(n=>!pv.includes(n));}
+const GM=['જાન્યુઆરી','ફેબ્રુઆરી','માર્ચ','એપ્રિલ','મે','જૂન','જુલાઈ','ઓગસ્ટ','સપ્ટેમ્બર','ઓક્ટોબર','નવેમ્બર','ડિસેમ્બર'];
+const WD=['રવિવાર','સોમવાર','મંગળવાર','બુધવાર','ગુરુવાર','શુક્રવાર','શનિવાર'],WS=['ર','સો','મં','બુ','ગુ','શુ','શ'];
+const NK=['અશ્વિની','ભરણી','કૃતિકા','રોહિણી','મૃગશીર્ષ','આર્દ્રા','પુનર્વસુ','પુષ્ય','આશ્લેષા','મઘા','પૂર્વા ફાલ્ગુની','ઉત્તરા ફાલ્ગુની','હસ્ત','ચિત્રા','સ્વાતિ','વિશાખા','અનુરાધા','જ્યેષ્ઠા','મૂળ','પૂર્વાષાઢા','ઉત્તરાષાઢા','શ્રવણ','ધનિષ્ઠા','શતભિષા','પૂર્વાભાદ્રપદ','ઉત્તરાભાદ્રપદ','રેવતી'];
+const YG=['વિષ્કુંભ','પ્રીતિ','આયુષ્માન','સૌભાગ્ય','શોભન','અતિગંડ','સુકર્મા','ધૃતિ','શૂલ','ગંડ','વૃદ્ધિ','ધ્રુવ','વ્યાઘાત','હર્ષણ','વજ્ર','સિદ્ધિ','વ્યતિપાત','વરીયાન','પરિઘ','શિવ','સિદ્ધ','સાધ્ય','શુભ','શુક્લ','બ્રહ્મ','ઐન્દ્ર','વૈધૃતિ'];
+const KN=['બવ','બાલવ','કૌલવ','તૈતિલ','ગર','વણિજ','વિષ્ટિ (ભદ્રા)'];
+const karanName=k=>k===0?'કિંસ્તુઘ્ન':k>=57?['શકુનિ','ચતુષ્પદ','નાગ'][k-57]:KN[(k-1)%7];
+const RS=['મેષ','વૃષભ','મિથુન','કર્ક','સિંહ','કન્યા','તુલા','વૃશ્ચિક','ધનુ','મકર','કુંભ','મીન'];
+const CH=['ઉદ્વેગ','ચલ','લાભ','અમૃત','કાળ','શુભ','રોગ'],CHG=[0,1,1,1,0,1,0],CHS=[0,3,6,2,5,1,4];
+const hm=ms=>{const p=parts(ms);return g((p.h%12)||12)+':'+g(String(p.mi).padStart(2,'0'));};
+const per=h=>h<4?'રાત્રે':h<12?'સવારે':h<16?'બપોરે':h<19?'સાંજે':'રાત્રે';
+function when(ms,ref){const p=parts(ms),r=parts(ref);const nx=Date.UTC(p.y,p.m,p.d)>Date.UTC(r.y,r.m,r.d)?' (કાલે)':'';return per(p.h)+' '+hm(ms)+nx;}
+const $=id=>document.getElementById(id);
+const monthLabel=l=>(l.adhik?'અધિક ':'')+MON[l.m];
+
+function tick(){const now=Date.now(),p=parts(now);
+ $('ck').textContent=g((p.h%12)||12)+':'+g(String(p.mi).padStart(2,'0'));
+ $('cs').textContent=g(String(p.s).padStart(2,'0'));
+ $('cp').textContent=per(p.h);}
+
+let calKey='';
+function renderCalendar(p){const key=p.y+'-'+p.m;
+ const fi=new Date(Date.UTC(p.y,p.m,1)).getUTCDay(),nd=new Date(Date.UTC(p.y,p.m+1,0)).getUTCDate(),rows=Math.ceil((fi+nd)/7);
+ let h=WS.map(x=>`<div class="w">${x}</div>`).join('')+'<div></div>'.repeat(fi);
+ for(let d=1;d<=nd;d++){const o=dayData(p.y,p.m,d),t=o.t;
+  const c=['d'];if(t===14)c.push('pu');if(t===29)c.push('am');if(t===10||t===25)c.push('ek');
+  const fl=fests(p.y,p.m,d);if(fl.length)c.push('fe');if(d===p.d)c.push('td');
+  const lab=(t%15===0&&t<29?pk(t)+' ':'')+tName(t);
+  h+=`<div class="${c.join(' ')}" title="${fl.join(', ')}"><b>${g(d)}</b><i>${lab}</i></div>`;}
+ const cal=$('cal');cal.style.gridTemplateRows=`auto repeat(${rows},1fr)`;cal.innerHTML=h;
+ $('cm').textContent=GM[p.m]+' '+g(p.y);}
+
+function renderFest(p){const out=[];
+ for(let i=0;i<120&&out.length<5;i++){const x=new Date(Date.UTC(p.y,p.m,p.d+i)),y=x.getUTCFullYear(),m=x.getUTCMonth(),d=x.getUTCDate();
+  for(const n of fests(y,m,d)){if(out.length<5)out.push({y,m,d,n,i});}}
+ $('fs').innerHTML=out.map(e=>`<div class="fi"><b>${g(e.d)} ${GM[e.m]}${e.i===0?' (આજે)':''}</b><span>${e.n}</span></div>`).join('');}
+
+function renderPanchang(){const now=Date.now(),p=parts(now);
+ let vd={y:p.y,m:p.m,d:p.d},di=dayData(vd.y,vd.m,vd.d);
+ if(now<di.rise){const x=new Date(Date.UTC(p.y,p.m,p.d-1));vd={y:x.getUTCFullYear(),m:x.getUTCMonth(),d:x.getUTCDate()};di=dayData(vd.y,vd.m,vd.d);}
+ const vwd=new Date(Date.UTC(vd.y,vd.m,vd.d)).getUTCDay(),lm=di.lm,t0=di.t;
+ const vs=p.y+56+((lm.m>=7&&p.m>=8)?1:0);
+ $('gd').textContent=`${monthLabel(lm)} ${pk(t0)} ${tName(t0)}`;
+ $('dd').textContent=`${WD[p.wd]}, ${g(p.d)} ${GM[p.m]} ${g(p.y)}`;
+ $('vs').textContent=`વિક્રમ સંવત ${g(vs)}`;
+ const tn=tithiIdx(now),te=nextChange(tithiIdx,now),sunriseEnd=nextChange(tithiIdx,di.rise);
+ const nk=nakIdx(now),yg=yogaIdx(now),kr=karanIdx(now),rs=Math.floor(norm(moonLon(now)-ayan(now))/30);
+ const ln=(di.set-di.rise)/8,ri=[8,2,7,5,6,4,3][vwd]-1,r0=di.rise+ri*ln;
+ const R=(a,b,s)=>`<div class="row"><span>${a}</span><b>${b}${s?`<small>${s}</small>`:''}</b></div>`;
+ $('pg').innerHTML=
+  R('સૂર્યોદયે તિથિ',`${pk(t0)} ${tName(t0)}`,'સુધી '+when(sunriseEnd,now))+
+  R('અત્યારે તિથિ',`${pk(tn)} ${tName(tn)}`,'સુધી '+when(te,now))+
+  R('નક્ષત્ર',NK[nk],'સુધી '+when(nextChange(nakIdx,now),now))+
+  R('યોગ',YG[yg],'સુધી '+when(nextChange(yogaIdx,now),now))+
+  R('કરણ',karanName(kr),'સુધી '+when(nextChange(karanIdx,now),now))+
+  R('ચંદ્ર રાશિ',RS[rs],'')+
+  R('સૂર્યોદય / સૂર્યાસ્ત',`${hm(di.rise)} / ${hm(di.set)}`,'')+
+  R('રાહુકાળ',`${hm(r0)} – ${hm(r0+ln)}`,'');
+ const dl=(di.set-di.rise)/8,nl=(di.nrise-di.set)/8,s0=CHS[vwd],n0=(s0+5)%7;
+ const slot=(a,b,i,k)=>{const c=CHG[k],cur=now>=a&&now<b;return `<div class="sl ${c?'g':'n'}${cur?' now':''}">${CH[k]}<em>${hm(a)}–${hm(b)}</em></div>`;};
+ let d='',n='';
+ for(let i=0;i<8;i++){d+=slot(di.rise+i*dl,di.rise+(i+1)*dl,i,(s0+i)%7);n+=slot(di.set+i*nl,di.set+(i+1)*nl,i,(n0+5*i)%7);}
+ $('cd').innerHTML=d;$('cn').innerHTML=n;}
+
+function refresh(){const p=parts(Date.now());const k=p.y+'-'+p.m+'-'+p.d;
+ if(k!==calKey){calKey=k;renderCalendar(p);renderFest(p);}
+ renderPanchang();}
+tick();refresh();
+setInterval(tick,1000);setInterval(refresh,30000);
+</script>
+</body>
+</html>
