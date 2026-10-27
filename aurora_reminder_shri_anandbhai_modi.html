@@ -1,0 +1,298 @@
+<!DOCTYPE html>
+<html lang="gu"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="theme-color" content="#0b1020">
+<meta name="description" content="વ્યક્તિગત રિમાઇન્ડર અને એલાર્મ એપ — આનંદ મોદી">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="mobile-web-app-capable" content="yes">
+<title>આનંદ મોદી · ઓરોરા રિમાઇન્ડર</title>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+Gujarati:wght@400;600;700&family=Syne:wght@700;800&display=swap" rel="stylesheet">
+<style>
+:root{--v:#7c5cff;--m:#3dffc4;--c:#ff5c8a;--y:#ffd166;--bg:#070816}
+*{box-sizing:border-box;margin:0;padding:0;-webkit-tap-highlight-color:transparent}
+body{min-height:100vh;background:var(--bg);color:#eef0ff;font-family:'Noto Sans Gujarati',system-ui,sans-serif;overflow-x:hidden;padding:env(safe-area-inset-top) 0 6rem}
+body::before,body::after{content:"";position:fixed;width:70vmax;height:70vmax;border-radius:50%;filter:blur(60px);pointer-events:none;z-index:0;animation:drift 22s ease-in-out infinite alternate}
+body::before{left:-20vmax;top:-25vmax;background:radial-gradient(circle,#7c5cff66,transparent 65%)}
+body::after{right:-25vmax;bottom:-25vmax;background:radial-gradient(circle,#ff5c8a44,#3dffc422 45%,transparent 70%);animation-duration:30s;animation-direction:alternate-reverse}
+.stars{position:fixed;inset:0;z-index:0;pointer-events:none;background:radial-gradient(#fff 1px,transparent 1.6px) 0 0/97px 97px,radial-gradient(#9fd 1px,transparent 1.6px) 40px 60px/131px 131px;opacity:.35;animation:tw 4s ease-in-out infinite alternate}
+@keyframes drift{to{transform:translate(12vmax,8vmax) scale(1.2)}}@keyframes tw{to{opacity:.1}}
+@keyframes up{from{opacity:0;transform:translateY(28px) scale(.97)}}@keyframes spin{to{transform:rotate(360deg)}}
+@keyframes pop{0%{transform:scale(.4);opacity:0}70%{transform:scale(1.15)}100%{transform:scale(1);opacity:1}}
+@keyframes blink{50%{opacity:.25}}@keyframes flash{to{filter:brightness(1.35)}}
+@keyframes shock{0%{transform:scale(.3);opacity:.9}100%{transform:scale(7);opacity:0}}
+@keyframes bell{0%,100%{transform:rotate(-22deg)}50%{transform:rotate(22deg)}}
+@keyframes shine{to{background-position:200% 0}}@keyframes shk{25%{transform:translateX(-8px)}75%{transform:translateX(8px)}}
+.app{position:relative;z-index:1;max-width:1100px;margin:0 auto;padding:1rem;display:grid;gap:1rem;grid-template-columns:1fr 1fr}
+.gl{background:linear-gradient(145deg,#ffffff16,#ffffff07);border:1px solid #ffffff24;border-radius:1.7rem;backdrop-filter:blur(16px);-webkit-backdrop-filter:blur(16px);box-shadow:0 24px 50px -24px #000,inset 0 1px #ffffff22;padding:1.2rem;animation:up .8s cubic-bezier(.2,.8,.2,1) both}
+.hero{grid-column:1/-1;display:flex;align-items:center;justify-content:space-between;gap:1rem;flex-wrap:wrap;overflow:hidden;position:relative}
+.clk{font:800 clamp(3.4rem,11vw,6.6rem)/1 Syne,sans-serif;background:linear-gradient(90deg,#fff,var(--m),var(--v),#fff);background-size:250% 100%;-webkit-background-clip:text;background-clip:text;color:transparent;animation:shine 8s linear infinite}
+.clk i{font-style:normal;animation:blink 1s steps(2) infinite}.clk small{font-size:.38em;color:var(--c);-webkit-text-fill-color:var(--c);margin-left:.15em}
+#pp{color:var(--y);font-weight:700;margin-left:.5rem}#dt{margin-top:.5rem;font-size:1.15rem;color:#c9ccff}
+.orb{position:relative;width:min(15rem,62vw);aspect-ratio:1;flex:none;margin:0 auto}
+.ring{position:absolute;inset:0;border-radius:50%;border:1.5px dashed #ffffff40;animation:spin 18s linear infinite}
+.ring.b{inset:9%;border-color:#3dffc455;animation-duration:12s;animation-direction:reverse}
+.ring::after{content:"";position:absolute;top:-.45rem;left:50%;width:.9rem;height:.9rem;margin-left:-.45rem;border-radius:50%;background:var(--c);box-shadow:0 0 1.2rem var(--c)}
+.ring.b::after{background:var(--m);box-shadow:0 0 1.2rem var(--m)}
+.core{--p:0;position:absolute;inset:18%;border-radius:50%;background:conic-gradient(var(--m) calc(var(--p)*1%),#ffffff18 0);display:grid;place-items:center;filter:drop-shadow(0 0 1.2rem #3dffc455)}
+.core::before{content:"";position:absolute;inset:7%;border-radius:50%;background:#0b0d24}
+.core div{position:relative;text-align:center;padding:.3rem}
+#nx{display:block;font-size:.78rem;color:#b8bcff;max-width:7rem;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+#cd{font:800 1.5rem Syne,sans-serif;color:#fff}
+#act{grid-column:1/-1;border:0;border-radius:1.2rem;padding:1rem;font:700 1rem inherit;font-family:inherit;color:#07102a;background:linear-gradient(90deg,var(--y),var(--c),var(--v));background-size:200% 100%;animation:up .6s both,shine 4s linear infinite;cursor:pointer;box-shadow:0 10px 30px -10px var(--c)}
+#act.ok{background:#3dffc422;color:var(--m);border:1px solid #3dffc455;animation:none;box-shadow:none}
+h2{font-size:1.2rem;margin-bottom:.8rem;display:flex;align-items:center;gap:.5rem}
+.nav{display:flex;align-items:center;justify-content:space-between;margin-bottom:.8rem;gap:.5rem}
+.nav b{font:800 1.25rem Syne,'Noto Sans Gujarati',sans-serif}
+.btn{border:1px solid #ffffff2e;background:#ffffff14;color:#fff;border-radius:.9rem;padding:.55rem .95rem;font:600 .95rem inherit;font-family:inherit;cursor:pointer;transition:transform .15s,background .2s}
+.btn:hover{background:#ffffff26;transform:translateY(-2px)}.btn:active{transform:scale(.93)}
+.grid{display:grid;grid-template-columns:repeat(7,1fr);gap:.3rem}
+.wh{text-align:center;font-size:.8rem;color:var(--c);padding:.2rem 0}
+.dy{aspect-ratio:1;border-radius:50%;border:1px solid transparent;background:#ffffff0d;color:#eef;font:600 1rem inherit;font-family:inherit;cursor:pointer;display:flex;flex-direction:column;align-items:center;justify-content:center;position:relative;transition:transform .2s,background .2s;animation:pop .45s both;animation-delay:calc(var(--i)*14ms)}
+.dy:hover{transform:scale(1.14);background:#7c5cff44}
+.dy em{font-style:normal;font-size:.7rem;line-height:.5;color:var(--m);margin-top:.12rem}
+.dy.tdy{border-color:var(--y);color:var(--y)}
+.dy.sel{background:linear-gradient(135deg,var(--v),var(--c));color:#fff;box-shadow:0 0 1.5rem #7c5cffaa}
+.dy.has:not(.sel){background:#3dffc41c}
+.grid.slide{animation:up .35s both}
+.fm{display:grid;gap:.7rem}
+.fm input,.fm select{width:100%;padding:.8rem .9rem;border-radius:.9rem;border:1.5px solid #ffffff2e;background:#ffffff10;color:#fff;font:1rem inherit;font-family:inherit;outline:none;transition:border-color .2s,box-shadow .2s;color-scheme:dark}
+.fm input:focus,.fm select:focus{border-color:var(--m);box-shadow:0 0 0 4px #3dffc422}
+.fm select option{background:#14163a}
+.two{display:grid;grid-template-columns:1fr 1fr;gap:.7rem}
+.fm.shk{animation:shk .35s}
+.go{border:0;border-radius:1rem;padding:.95rem;font:800 1.05rem inherit;font-family:inherit;color:#07102a;background:linear-gradient(90deg,var(--m),var(--v));cursor:pointer;box-shadow:0 10px 26px -10px var(--m);transition:transform .15s}
+.go:active{transform:scale(.96)}
+.lst{grid-column:1/-1}
+.cols{display:grid;grid-template-columns:1fr 1fr;gap:1rem}
+.it{display:flex;align-items:center;gap:.8rem;padding:.75rem .9rem;border-radius:1.1rem;background:#ffffff0e;border-left:4px solid var(--m);margin-bottom:.55rem;animation:up .45s both}
+.it.dn{opacity:.45;border-color:#888}.it.dn b{text-decoration:line-through}
+.tm{font:800 .95rem Syne,'Noto Sans Gujarati',sans-serif;color:var(--y);min-width:5.4rem}
+.tx{flex:1;min-width:0}.tx b{display:block;overflow-wrap:anywhere}.tx small{color:#aab;font-size:.78rem}
+.x{border:0;background:#ff5c8a2a;color:var(--c);width:2rem;height:2rem;border-radius:50%;cursor:pointer;font-size:.9rem}
+.emp{color:#9aa;text-align:center;padding:1rem}
+#fab{position:fixed;right:1.1rem;bottom:calc(1.1rem + env(safe-area-inset-bottom));z-index:5;width:3.6rem;height:3.6rem;border-radius:50%;border:0;font-size:2rem;color:#07102a;background:linear-gradient(135deg,var(--m),var(--v));box-shadow:0 10px 30px #7c5cff99;cursor:pointer;animation:pop .6s .6s both}
+#toast{position:fixed;left:50%;bottom:6rem;transform:translate(-50%,30px);background:#14163aee;border:1px solid var(--m);padding:.7rem 1.2rem;border-radius:2rem;opacity:0;transition:.4s;z-index:50;pointer-events:none}#toast.on{opacity:1;transform:translate(-50%,0)}
+#ring{position:fixed;inset:0;z-index:100;display:none;flex-direction:column;align-items:center;justify-content:center;gap:1.1rem;text-align:center;padding:1.5rem;background:radial-gradient(circle at 50% 38%,#ff3d6e,#7a0c3a 55%,#1a0212);animation:flash .45s infinite alternate;overflow:hidden}
+#ring.on{display:flex}
+.shock{position:absolute;left:50%;top:36%;width:8rem;height:8rem;margin:-4rem;border:3px solid #fff;border-radius:50%;animation:shock 2.1s infinite;opacity:0}
+.shock:nth-child(2){animation-delay:.7s}.shock:nth-child(3){animation-delay:1.4s}
+.bell{font-size:6.5rem;transform-origin:50% 0;animation:bell .4s ease-in-out infinite;position:relative;filter:drop-shadow(0 0 2rem #ffd166)}
+#rt{font:800 clamp(1.8rem,7vw,3.2rem)/1.2 Syne,'Noto Sans Gujarati',sans-serif;position:relative;overflow-wrap:anywhere}
+#rtm{font-size:1.5rem;color:var(--y);position:relative}
+.sl{--f:0;position:relative;width:min(22rem,86vw);height:4.2rem;border-radius:4rem;background:#ffffff26;border:1px solid #ffffff66;display:flex;align-items:center;justify-content:center;font-weight:700;margin-top:1rem;overflow:hidden}
+.sl span{opacity:calc(1 - var(--f));background:linear-gradient(90deg,#fff8,#fff,#fff8);background-size:200% 100%;-webkit-background-clip:text;background-clip:text;color:transparent;animation:shine 2s linear infinite;padding-left:2.5rem}
+.sl i{position:absolute;left:4px;top:4px;width:3.3rem;height:3.3rem;border-radius:50%;background:#fff;color:#c0143c;display:grid;place-items:center;font-style:normal;font-size:1.5rem;touch-action:none;cursor:grab}
+.sn{position:relative;border:1.5px solid #fff9;background:#0003;color:#fff;border-radius:2rem;padding:.7rem 1.5rem;font:700 1rem inherit;font-family:inherit;cursor:pointer}
+@media(max-width:760px){.app{grid-template-columns:1fr;padding:.7rem}.cols{grid-template-columns:1fr}.hero{justify-content:center;text-align:center}}
+@media(prefers-reduced-motion:reduce){.stars,.ring{animation:none}}
+
+/* Mobile-first usability improvements */
+html{scroll-behavior:smooth;-webkit-text-size-adjust:100%;text-size-adjust:100%}
+button,input,select{touch-action:manipulation}
+button,.btn,.go,#act,.x,#fab{min-height:44px}
+.fm input,.fm select{font-size:16px;min-height:48px}
+@media(max-width:760px){
+  body{padding-bottom:calc(5.5rem + env(safe-area-inset-bottom))}
+  .app{grid-template-columns:minmax(0,1fr);padding:.65rem;gap:.75rem;width:100%}
+  .gl{padding:1rem;border-radius:1.25rem;min-width:0}
+  .hero{grid-column:1;display:flex;flex-direction:column;gap:1.1rem;text-align:center}
+  .hero>div:first-child{width:100%}
+  .clk{font-size:clamp(2.7rem,13vw,4.5rem);white-space:nowrap}
+  #dt{font-size:.95rem}
+  .orb{width:min(12rem,55vw)}
+  #act{grid-column:1;width:100%;font-size:.95rem;line-height:1.5;padding:.9rem}
+  .grid{gap:.22rem}
+  .dy{min-height:36px;font-size:.92rem}
+  .two{grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:.5rem}
+  .cols{grid-template-columns:minmax(0,1fr);gap:.6rem}
+  .it{padding:.7rem .65rem;gap:.55rem}
+  .tm{min-width:4.4rem;font-size:.82rem}
+  .tx b{font-size:.95rem}
+  .btn{padding:.6rem .7rem}
+  #fab{right:.8rem;bottom:calc(.8rem + env(safe-area-inset-bottom));width:3.4rem;height:3.4rem}
+  #toast{width:max-content;max-width:90vw;text-align:center;bottom:calc(5rem + env(safe-area-inset-bottom))}
+  .sl{max-width:86vw}
+}
+@media(max-width:380px){
+  .app{padding:.45rem}
+  .gl{padding:.8rem}
+  .two{grid-template-columns:1fr}
+  .nav b{font-size:1.05rem}
+  .dy{font-size:.82rem}
+  .tm{min-width:3.9rem}
+}
+
+
+/* Refined personalized mobile UI */
+:root{--v:#8b7cff;--m:#65f0ce;--c:#ff7ba2;--y:#ffd782;--bg:#090d1b}
+body{background:linear-gradient(160deg,#0b1020 0%,#10152b 48%,#090d1b 100%);padding-bottom:calc(6rem + env(safe-area-inset-bottom))}
+body::before{background:radial-gradient(circle,#6d5df044,transparent 66%)}
+body::after{background:radial-gradient(circle,#ff5c8a26,#3dffc414 45%,transparent 70%)}
+.app{max-width:980px;padding:clamp(.65rem,2.5vw,1.25rem);gap:1rem}
+.gl{background:linear-gradient(145deg,rgba(28,35,64,.88),rgba(17,22,43,.78));border:1px solid rgba(190,202,255,.13);border-radius:1.45rem;box-shadow:0 16px 42px -24px #000,inset 0 1px rgba(255,255,255,.07);backdrop-filter:blur(18px)}
+.hero{gap:1.2rem}
+.identity{display:flex;align-items:center;gap:.8rem;width:100%;margin-bottom:.4rem;text-align:left}
+.avatar{width:3rem;height:3rem;display:grid;place-items:center;border-radius:1rem;background:linear-gradient(145deg,#8b7cff,#5ce4c4);color:#10152b;font-size:1.25rem;font-weight:800;box-shadow:0 8px 24px #8b7cff30;flex:none}
+.eyebrow{font-size:.72rem;letter-spacing:.08em;color:#a9b3d9}
+.welcome{font-size:1.2rem;font-weight:800;line-height:1.5}
+.identity-sub{font-size:.82rem;color:#aeb7d6;line-height:1.6}
+.clk{font-size:clamp(2.9rem,10vw,5.6rem);letter-spacing:-.045em}
+#dt{font-size:.95rem;color:#b9c2e2}
+#act{border-radius:1rem;min-height:54px;letter-spacing:.01em}
+h2{font-size:1.05rem}
+.btn{border-color:#aab7ef2b;background:#ffffff0b}
+.fm input,.fm select{background:#0e1428;border-color:#333d60;border-radius:.85rem}
+.fm input::placeholder{color:#7f8bad}
+.go{min-height:50px;border-radius:.9rem}
+.dy{border-radius:.75rem;background:#ffffff08}
+.dy.sel{border-radius:.75rem}
+.it{background:rgba(255,255,255,.045);border:1px solid rgba(180,194,255,.09);border-left:3px solid var(--m);border-radius:1rem}
+.it.dn{border-left-color:#66708c}
+.tm{font-family:'Syne','Noto Sans Gujarati',sans-serif}
+#fab{width:3.7rem;height:3.7rem;box-shadow:0 10px 30px #6d5df055}
+.profile-card small{display:block}
+@media(max-width:760px){
+ .app{grid-template-columns:minmax(0,1fr);padding:.65rem;gap:.75rem}
+ .gl{padding:1rem;border-radius:1.2rem}
+ .hero{grid-column:1;display:flex;flex-direction:column;gap:.9rem;text-align:center}
+ .identity{margin-bottom:.25rem}
+ .hero>div:first-child{width:100%}
+ .orb{width:min(10.5rem,47vw)}
+ .clk{font-size:clamp(2.7rem,12vw,4rem)}
+ .identity-sub{max-width:24rem}
+ .cols{grid-template-columns:minmax(0,1fr)}
+ .lst{padding-bottom:1.2rem}
+ .two{gap:.55rem}
+ .dy{min-height:38px}
+}
+@media(max-width:380px){
+ .app{padding:.45rem}
+ .gl{padding:.8rem}
+ .welcome{font-size:1.05rem}
+ .identity-sub{font-size:.76rem}
+ .two{grid-template-columns:minmax(0,1fr)}
+}
+
+</style></head><body>
+<div class="stars"></div>
+<div class="app">
+ <div class="gl hero"><div class="identity"><div class="avatar">આ</div><div><div class="eyebrow">તમારી વ્યક્તિગત સહાયક</div><div class="welcome">નમસ્તે, <span id="helloName">SHRI ANANDBHAI MODI</span> 👋</div><div class="identity-sub">તમારા દિવસને ગોઠવો, એક રિમાઇન્ડર સાથે.</div></div></div><div><div class="clk" id="clk"></div><div id="dt"></div></div>
+  <div class="orb"><div class="ring"></div><div class="ring b"></div><div class="core" id="core"><div><small id="nx"></small><span id="cd"></span></div></div></div></div>
+ <button id="act">🔔 એલાર્મ સક્રિય કરો (અવાજ + સૂચના + સ્ક્રીન ચાલુ)</button>
+ <div class="gl"><div class="nav"><button class="btn" id="pv">‹</button><b id="mt"></b><button class="btn" id="nxm">›</button></div>
+  <div class="grid" id="grid"></div><div style="text-align:center;margin-top:.8rem"><button class="btn" id="today">📍 આજે</button></div></div>
+ <div class="gl fm" id="fm"><h2>➕ નવું રિમાઇન્ડર</h2>
+  <input id="ft" placeholder="કામનું નામ (દા.ત. દવા લેવી)" maxlength="80">
+  <div class="two"><input id="fd" type="date"><input id="ftm" type="time"></div>
+  <div class="two"><select id="fr"><option value="n">એક જ વાર</option><option value="d">રોજ</option><option value="w">દર અઠવાડિયે</option><option value="m">દર મહિને</option></select>
+  <select id="fn"><option value="siren">🚨 સાયરન</option><option value="bell">🔔 ઘંટડી</option><option value="beep">⏰ બીપ બીપ</option></select></div>
+  <div class="two"><button class="btn" id="test">🔊 અવાજ ટેસ્ટ</button><button class="go" id="add">સેટ કરો ✓</button></div></div>
+
+ <div class="gl fm profile-card" id="profile">
+  <h2>👤 મારી વિગતો</h2>
+  <input id="pname" placeholder="તમારું નામ" maxlength="80" value="SHRI ANANDBHAI MODI" autocomplete="name">
+  <div class="two">
+   <input id="pphone" type="tel" inputmode="tel" placeholder="મોબાઇલ નંબર" maxlength="20" value="9427914014" autocomplete="tel">
+   <input id="poffice" placeholder="ઓફિસ / સંસ્થા" maxlength="100" autocomplete="organization">
+  </div>
+  <input id="pnote" placeholder="અન્ય વિગતો (વૈકલ્પિક)" maxlength="160">
+  <button class="go" id="saveprofile" type="button">વિગતો સેવ કરો ✓</button>
+  <small style="color:#aab;line-height:1.5">તમારી વિગતો આ ડિવાઇસના બ્રાઉઝરમાં સેવ થશે.</small>
+ </div>
+
+ <div class="gl lst"><h2>🗓 <span id="sd"></span></h2><div class="cols"><div><div id="l1"></div></div><div><h2 style="font-size:1rem">⏳ આગામી</h2><div id="l2"></div></div></div></div>
+</div>
+<button id="fab" aria-label="નવું">＋</button><div id="toast"></div>
+<div id="ring"><i class="shock"></i><i class="shock"></i><i class="shock"></i><div class="bell">🔔</div><div id="rt"></div><div id="rtm"></div>
+ <div class="sl" id="sl"><span>બંધ કરવા સ્લાઇડ કરો</span><i id="kn" tabindex="0" role="button" aria-label="બંધ કરો">➜</i></div><button class="sn" id="snz">😴 ૫ મિનિટ પછી ફરી</button></div>
+<script>
+const $=i=>document.getElementById(i),pad=n=>String(n).padStart(2,'0'),key=d=>d.getFullYear()+'-'+pad(d.getMonth()+1)+'-'+pad(d.getDate());
+const MN=['જાન્યુઆરી','ફેબ્રુઆરી','માર્ચ','એપ્રિલ','મે','જૂન','જુલાઈ','ઓગસ્ટ','સપ્ટેમ્બર','ઓક્ટોબર','નવેમ્બર','ડિસેમ્બર'],WD=['રવિવાર','સોમવાર','મંગળવાર','બુધવાર','ગુરુવાર','શુક્રવાર','શનિવાર'],WS=['ર','સો','મં','બુ','ગુ','શુ','શ'];
+const REP={n:'એક વાર',d:'રોજ',w:'દર અઠવાડિયે',m:'દર મહિને'},TN={siren:'સાયરન',bell:'ઘંટડી',beep:'બીપ'};
+const per=h=>h<4?'રાત્રે':h<12?'સવારે':h<16?'બપોરે':h<19?'સાંજે':'રાત્રે',t12=d=>(d.getHours()%12||12)+':'+pad(d.getMinutes())+' '+per(d.getHours());
+const esc=s=>String(s).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+let R=[];try{R=JSON.parse(localStorage.getItem('rm1')||'[]')}catch(e){}
+const save=()=>{try{localStorage.setItem('rm1',JSON.stringify(R))}catch(e){}};
+let V=new Date();V.setDate(1);let S=key(new Date()),AC,MS,ringing=null,lt,tt,wl;
+/* ---------- sound ---------- */
+function unlock(){if(!AC){AC=new(window.AudioContext||window.webkitAudioContext)();MS=AC.createDynamicsCompressor();MS.connect(AC.destination)}if(AC.state!=='running')AC.resume()}
+function tone(f,d,ty,g,t){const o=AC.createOscillator(),v=AC.createGain();o.type=ty;o.frequency.setValueAtTime(f[0],t);if(f[1])o.frequency.linearRampToValueAtTime(f[1],t+d);
+ v.gain.setValueAtTime(0,t);v.gain.linearRampToValueAtTime(g,t+.02);v.gain.setValueAtTime(g,t+d-.03);v.gain.linearRampToValueAtTime(0,t+d);o.connect(v);v.connect(MS);o.start(t);o.stop(t+d+.05)}
+const TONES={siren:t=>{tone([650,1350],.5,'sawtooth',1,t);tone([1350,650],.5,'sawtooth',1,t+.5)},
+ bell:t=>{[[880,1],[1320,.6],[1760,.4],[2640,.25]].forEach(a=>tone([a[0]],.95,'sine',a[1],t));tone([440],.95,'triangle',.8,t)},
+ beep:t=>{[0,.22,.44].forEach(o=>tone([1100],.14,'square',1,t+o))}};
+/* ---------- calendar ---------- */
+function cal(){const y=V.getFullYear(),m=V.getMonth(),fi=new Date(y,m,1).getDay(),nd=new Date(y,m+1,0).getDate(),tk=key(new Date()),cnt={};
+ R.filter(r=>!r.done).forEach(r=>{const k=key(new Date(r.at));cnt[k]=(cnt[k]||0)+1});
+ $('mt').textContent=MN[m]+' '+y;let h=WS.map(x=>`<b class="wh">${x}</b>`).join('')+'<i></i>'.repeat(fi);
+ for(let d=1;d<=nd;d++){const k=y+'-'+pad(m+1)+'-'+pad(d),c=cnt[k]||0;
+  h+=`<button class="dy${k===tk?' tdy':''}${k===S?' sel':''}${c?' has':''}" data-k="${k}" style="--i:${d}"><span>${d}</span>${c?`<em>${'•'.repeat(Math.min(c,3))}</em>`:'<em></em>'}</button>`}
+ $('grid').innerHTML=h}
+const item=r=>`<div class="it${r.done?' dn':''}"><div class="tm">${key(new Date(r.at))===S?'':new Date(r.at).getDate()+' '+MN[new Date(r.at).getMonth()].slice(0,3)+' '}${t12(new Date(r.at))}</div><div class="tx"><b>${esc(r.title)}</b><small>${REP[r.rep]} • ${TN[r.tone]}</small></div><button class="x" data-del="${r.id}" aria-label="કાઢો">✕</button></div>`;
+function list(){const d=new Date(S+'T00:00'),a=R.filter(r=>key(new Date(r.at))===S).sort((x,y)=>x.at-y.at),u=R.filter(r=>!r.done).sort((x,y)=>x.at-y.at).slice(0,5);
+ $('sd').textContent=WD[d.getDay()]+', '+d.getDate()+' '+MN[d.getMonth()];
+ $('l1').innerHTML=a.length?a.map(item).join(''):'<div class="emp">😴 આ દિવસે કોઈ રિમાઇન્ડર નથી</div>';
+ $('l2').innerHTML=u.length?u.map(item).join(''):'<div class="emp">✨ કંઈ બાકી નથી</div>'}
+const render=()=>{cal();list();tick()};
+/* ---------- clock + due check ---------- */
+function tick(){const n=new Date(),nx=R.filter(r=>!r.done).map(r=>({r,t:r.snooze||r.at})).sort((a,b)=>a.t-b.t)[0];
+ $('clk').innerHTML=pad(n.getHours()%12||12)+'<i>:</i>'+pad(n.getMinutes())+'<small>'+pad(n.getSeconds())+'</small><span id="pp">'+per(n.getHours())+'</span>';
+ $('dt').textContent=WD[n.getDay()]+', '+n.getDate()+' '+MN[n.getMonth()]+' '+n.getFullYear();
+ $('core').style.setProperty('--p',n.getSeconds()/60*100);
+ if(nx){const s=Math.max(0,Math.round((nx.t-n)/1000)),d=Math.floor(s/86400),h=Math.floor(s%86400/3600),m=Math.floor(s%3600/60);
+  $('cd').textContent=d?d+'દિ '+h+'ક':h?h+'ક '+pad(m)+'મિ':pad(m)+':'+pad(s%60);$('nx').textContent=nx.r.title}
+ else{$('cd').textContent='—';$('nx').textContent='કોઈ રિમાઇન્ડર નથી'}
+ if(!ringing){const due=R.find(r=>!r.done&&(r.snooze||r.at)<=Date.now());if(due)ring(due)}}
+/* ---------- alarm ---------- */
+function ring(r){ringing=r;$('rt').textContent=r.title;$('rtm').textContent=t12(new Date(r.at));$('ring').classList.add('on');
+ const go=()=>{if(AC&&AC.state==='running')TONES[r.tone](AC.currentTime+.02);if(navigator.vibrate)navigator.vibrate([400,150,400,150,400])};
+ go();lt=setInterval(go,1150);tt=setInterval(()=>{document.title=(document.title.startsWith('🔔')?'⏰ ':'🔔 ')+r.title},700);
+ try{if(window.Notification&&Notification.permission==='granted')new Notification('⏰ '+r.title,{body:t12(new Date(r.at)),requireInteraction:true})}catch(e){}}
+function nextAt(at,rep){const d=new Date(at);rep==='d'?d.setDate(d.getDate()+1):rep==='w'?d.setDate(d.getDate()+7):d.setMonth(d.getMonth()+1);return d.getTime()}
+function stopRing(snz){clearInterval(lt);clearInterval(tt);if(navigator.vibrate)navigator.vibrate(0);document.title='ઓરોરા રિમાઇન્ડર';$('ring').classList.remove('on');
+ const r=ringing;ringing=null;if(!r)return;
+ if(snz)r.snooze=Date.now()+300000;else{r.snooze=0;if(r.rep==='n')r.done=true;else{do{r.at=nextAt(r.at,r.rep)}while(r.at<=Date.now())}}
+ save();render()}
+$('snz').onclick=()=>stopRing(true);
+const kn=$('kn'),sl=$('sl');let dx=0,dr=false,x0=0;const mx=()=>sl.clientWidth-kn.offsetWidth-8;
+kn.addEventListener('pointerdown',e=>{dr=true;x0=e.clientX-dx;kn.setPointerCapture(e.pointerId);kn.style.transition='none'});
+kn.addEventListener('pointermove',e=>{if(!dr)return;dx=Math.max(0,Math.min(mx(),e.clientX-x0));kn.style.transform='translateX('+dx+'px)';sl.style.setProperty('--f',dx/mx())});
+kn.addEventListener('pointerup',()=>{if(!dr)return;dr=false;const ok=dx>mx()*.88;kn.style.transition='transform .3s';dx=0;kn.style.transform='';sl.style.setProperty('--f',0);if(ok)stopRing(false)});
+kn.addEventListener('keydown',e=>{if(e.key==='Enter'||e.key===' ')stopRing(false)});
+/* ---------- setup ---------- */
+async function wake(){try{if(navigator.wakeLock)wl=await navigator.wakeLock.request('screen')}catch(e){}}
+function toast(t){const e=$('toast');e.textContent=t;e.classList.add('on');setTimeout(()=>e.classList.remove('on'),2200)}
+$('act').onclick=async()=>{unlock();try{if(window.Notification&&Notification.permission==='default')await Notification.requestPermission()}catch(e){}wake();TONES.beep(AC.currentTime+.05);$('act').classList.add('ok');$('act').textContent='✅ એલાર્મ ચાલુ છે — આ પેજ ખુલ્લું રાખો'};
+document.addEventListener('pointerdown',()=>{unlock();if(AC&&AC.state==='running'&&!$('act').classList.contains('ok')){}},{passive:true});
+document.addEventListener('visibilitychange',()=>{if(!document.hidden&&AC)wake()});
+$('test').onclick=()=>{unlock();TONES[$('fn').value](AC.currentTime+.05)};
+function defTime(){const d=new Date(Date.now()+36e5);$('ftm').value=pad(d.getHours())+':'+pad(d.getMinutes());$('fd').value=S}
+$('add').onclick=()=>{const t=$('ft').value.trim(),d=$('fd').value,tm=$('ftm').value;
+ if(!t||!d||!tm){$('fm').classList.remove('shk');void $('fm').offsetWidth;$('fm').classList.add('shk');toast('⚠ નામ, તારીખ અને સમય ભરો');return}
+ R.push({id:Date.now(),title:t,at:new Date(d+'T'+tm).getTime(),rep:$('fr').value,tone:$('fn').value,done:false,snooze:0});save();
+ S=d;V=new Date(d+'T00:00');V.setDate(1);$('ft').value='';render();toast('✅ રિમાઇન્ડર સેટ થયું');if(!AC)toast('🔔 ઉપર "એલાર્મ સક્રિય કરો" દબાવો')};
+$('grid').onclick=e=>{const b=e.target.closest('.dy');if(!b)return;S=b.dataset.k;$('fd').value=S;render()};
+document.addEventListener('click',e=>{const x=e.target.closest('[data-del]');if(x){R=R.filter(r=>String(r.id)!==x.dataset.del);save();render()}});
+const mv=n=>{V.setMonth(V.getMonth()+n);cal();const g=$('grid');g.classList.remove('slide');void g.offsetWidth;g.classList.add('slide')};
+$('pv').onclick=()=>mv(-1);$('nxm').onclick=()=>mv(1);
+$('today').onclick=()=>{V=new Date();V.setDate(1);S=key(new Date());$('fd').value=S;render()};
+$('fab').onclick=()=>{$('fm').scrollIntoView({behavior:'smooth',block:'center'});setTimeout(()=>$('ft').focus(),500)};
+
+/* ---------- editable user profile ---------- */
+(function(){
+ const ids=['pname','pphone','poffice','pnote'];
+ try{
+  const p=JSON.parse(localStorage.getItem('aurora_profile')||'{"pname":"SHRI ANANDBHAI MODI","pphone":"9427914014"}');
+  ids.forEach(id=>{if(p[id]!==undefined && $(id)) $(id).value=p[id]});
+   $('helloName').textContent=$('pname').value.trim()||'મિત્ર';
+ }catch(e){}
+ $('saveprofile').addEventListener('click',()=>{
+  const p={};ids.forEach(id=>p[id]=$(id).value.trim());
+  try{localStorage.setItem('aurora_profile',JSON.stringify(p));toast('✅ તમારી વિગતો સેવ થઈ ગઈ');}
+  catch(e){toast('⚠ વિગતો સેવ થઈ શકી નથી');}
+ });
+})();
+
+defTime();render();setInterval(tick,1000);
+</script></body></html>
