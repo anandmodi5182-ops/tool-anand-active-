@@ -1,0 +1,418 @@
+<!DOCTYPE html>
+<html lang="gu">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="theme-color" content="#0f5a3c">
+<meta name="mobile-web-app-capable" content="yes"><meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent"><meta name="apple-mobile-web-app-title" content="ગ્રાન્ટ હિસાબ">
+<link rel="manifest" href="manifest.json"><link rel="icon" href="icon-192.png"><link rel="apple-touch-icon" href="icon-192.png">
+<title>ગ્રાન્ટ ખર્ચ હિસાબ</title>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+Gujarati:wght@400;600;700;800&display=swap" rel="stylesheet">
+<style>
+:root{--g:#0f5a3c;--m:#8a2b2b;--gold:#e0a82e;--ink:#1c2a22;--line:#d9ccae}
+*{box-sizing:border-box}html{-webkit-tap-highlight-color:transparent}body{overscroll-behavior-y:none}.btn,button{touch-action:manipulation}
+body{margin:0;background:radial-gradient(circle at 20% 0,#fff7dc,#f1e3b8 60%,#e6d6a3);background-attachment:fixed;color:var(--ink);font:15px 'Noto Sans Gujarati',Shruti,'Nirmala UI',Arial,sans-serif;min-height:100vh}
+.top{background:linear-gradient(#1b8a5a,#0f5a3c);color:#fff;text-align:center;font-weight:800;letter-spacing:.5px;padding:calc(11px + env(safe-area-inset-top)) 8px 11px;font-size:17px;border-bottom:5px solid var(--gold);box-shadow:0 6px 14px #0004;text-shadow:0 2px 0 #0006;position:sticky;top:0;z-index:5}
+.school{max-width:1076px;margin:12px auto 0;padding:10px 12px;background:#fff;border-radius:14px;box-shadow:0 5px 0 #c9b98a,0 12px 20px #0002;font-weight:800;color:var(--m);text-align:center;width:calc(100% - 24px)}
+.wrap{max-width:1100px;margin:0 auto;padding:12px}
+h1{margin:6px 0 2px;font-size:22px;color:var(--g);text-shadow:0 2px 0 #fff}
+.sub{margin:0 0 10px;color:#5b6a5f;font-size:13px}
+.layout{display:grid;grid-template-columns:170px 1fr;gap:14px;align-items:start}.main{min-width:0}.tabs{position:sticky;top:64px;display:flex;flex-direction:column;gap:11px;padding:6px 4px 14px}
+.tabs button{width:100%;padding:11px 10px;border:0;border-radius:12px;background:#fff;color:var(--g);font:inherit;font-weight:800;cursor:pointer;text-align:left;box-shadow:0 5px 0 #b9ab7d,0 9px 12px #0002}
+.tabs button.on{background:linear-gradient(#27a56f,var(--g));color:#fff;box-shadow:0 5px 0 #073d27,0 9px 12px #0003;transform:translateX(5px)}
+.card{background:#fffdf6;border-radius:16px;padding:14px;margin-bottom:18px;box-shadow:0 6px 0 #cdbd8e,0 14px 24px #0003;border:1px solid #eadfba}
+.card h2{margin:0 0 8px;font-size:17px;color:var(--m)}
+.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(170px,1fr));gap:10px}
+label{display:block;font-size:12px;font-weight:700;margin-bottom:3px;color:#4a5a4f}
+input,select,textarea{width:100%;padding:9px;border:1.5px solid var(--line);border-radius:9px;font:inherit;font-size:16px;background:#fff;box-shadow:inset 0 2px 4px #0002}
+input:focus,select:focus{outline:2px solid var(--gold)}
+.btn{padding:10px 16px;border:0;border-radius:12px;font:inherit;font-weight:800;cursor:pointer;color:#fff;background:linear-gradient(#27a56f,var(--g));box-shadow:0 5px 0 #073d27,0 9px 12px #0003}
+.btn.red{background:linear-gradient(#b94444,var(--m));box-shadow:0 5px 0 #4d1515,0 9px 12px #0003}
+.btn.gold{background:linear-gradient(#f6cf66,var(--gold));color:#222;box-shadow:0 5px 0 #8a6510,0 9px 12px #0003}
+.btn.sm{padding:4px 9px;font-size:12px;box-shadow:0 3px 0 #0005}
+.tabs button:active,.btn:active{transform:translateY(4px);box-shadow:0 1px 0 #0006}
+.seg{display:flex;gap:8px}.seg button{flex:1;padding:9px;border:0;background:#fff;border-radius:10px;font:inherit;font-weight:800;color:var(--m);cursor:pointer;box-shadow:0 4px 0 #b9ab7d}
+.seg button.on{background:linear-gradient(#b94444,var(--m));color:#fff;box-shadow:0 4px 0 #4d1515}
+.info{margin:8px 0;padding:9px 11px;border-radius:10px;background:#eaf4ec;border-left:6px solid var(--g);font-weight:600;font-size:14px;box-shadow:0 3px 0 #bcd5c3}
+.info.bad{background:#fbe7e7;border-color:var(--m);color:var(--m);box-shadow:0 3px 0 #e3b7b7}
+table{width:100%;border-collapse:collapse;background:#fff;font-size:13.5px}
+th,td{border:1px solid var(--line);padding:6px 7px;text-align:left;vertical-align:top}
+th{background:#efe4c6;color:#3b2f10}td.n,th.n{text-align:right;white-space:nowrap}
+tr.g td{background:#eaf4ec}.tw{overflow-x:auto}
+.cards{display:grid;grid-template-columns:repeat(auto-fit,minmax(250px,1fr));gap:16px;perspective:900px}
+.hc{background:#fff;border-radius:14px;border-top:6px solid var(--g);padding:12px;transition:transform .3s;box-shadow:0 6px 0 #cdbd8e,0 14px 22px #0003}
+.hc:hover{transform:rotateX(4deg) rotateY(-4deg) translateY(-4px)}
+.hc b{font-size:16px;color:var(--g)}.hc .r{display:flex;justify-content:space-between;margin-top:4px}
+.bar{height:12px;background:#e8e2cf;border-radius:8px;overflow:hidden;margin:8px 0 4px;box-shadow:inset 0 2px 3px #0003}.bar i{display:block;height:100%;background:linear-gradient(#f6cf66,var(--gold))}
+.neg{color:var(--m);font-weight:800}.pos{color:var(--g);font-weight:800}
+.tools{display:flex;gap:10px;flex-wrap:wrap;margin:10px 0}
+.pane{display:none}.pane.on{display:block}.empty{padding:14px;text-align:center;color:#7a7a6a}
+.c3{display:grid;grid-template-columns:1fr 1fr;gap:16px;perspective:800px;margin-top:14px}
+.cube{border-radius:16px;padding:16px 8px;text-align:center;color:#fff;font-weight:800;transform:rotateX(10deg);box-shadow:0 9px 0 rgba(0,0,0,.35),0 18px 26px #0004;background:linear-gradient(#27a56f,var(--g))}
+.cube.b{background:linear-gradient(#4a86d9,#1f4f9a)}.cube b{display:block;font-size:24px;margin-top:4px}
+.tot{margin-top:16px;text-align:center;font-weight:800;color:var(--m);font-size:17px}
+@media(max-width:600px){h1{font-size:18px}th,td{font-size:12.5px;padding:5px}.c3{grid-template-columns:1fr}.top{font-size:15px}}
+@media(max-width:700px){body{padding-bottom:calc(84px + env(safe-area-inset-bottom))}.wrap{padding:8px}.layout{display:block}
+.tabs{position:fixed;left:0;right:0;bottom:0;top:auto;z-index:30;flex-direction:row;gap:4px;padding:8px 6px calc(8px + env(safe-area-inset-bottom));background:#fff;box-shadow:0 -5px 16px #0004;border-top:3px solid var(--gold);overflow-x:auto}
+.tabs button{flex:1 0 58px;width:auto;padding:5px 2px;font-size:10.5px;line-height:1.25;text-align:center;border-radius:10px;box-shadow:0 3px 0 #b9ab7d}
+.tabs button.on{transform:translateY(-3px);box-shadow:0 3px 0 #073d27}.ei{display:block;font-size:20px}}
+#toast{display:none;position:fixed;bottom:16px;left:50%;transform:translateX(-50%);background:#222;color:#fff;padding:10px 14px;border-radius:10px;z-index:20;max-width:90%;text-align:center}
+.pt,.pt>thead,.pt>tbody,.pt>tfoot,.pt>*>tr,.pt>*>tr>td{display:block;padding:0;border:0}
+.pt>thead,.pt>tfoot,#lpT,#lpS,#lpF,#lpB{display:none}
+@page{size:A4;margin:0}
+@media print{
+*{-webkit-print-color-adjust:exact;print-color-adjust:exact}
+body{background:#fff;color:#000;font-size:12pt}
+.top,.school,.tabs,.noprint,.btn,.tools,#toast,h1,.sub{display:none!important}
+.pt{display:table;width:100%}.pt>thead{display:table-header-group}.pt>tbody{display:table-row-group}.pt>tfoot{display:table-footer-group}
+.pt>*>tr{display:table-row}.pt>*>tr>td{display:table-cell;padding:0 15mm}
+.pt .sp{height:24mm}#lpH{padding-top:13mm}
+#lpT,#lpS{display:block}
+#lpB{display:block;position:fixed;top:6mm;left:6mm;right:6mm;bottom:6mm;border:3px double #000}
+#lpF{display:block;position:fixed;left:15mm;bottom:10mm;font-weight:800;font-size:11pt;border-top:1px solid #000;padding-top:2px}
+.lh{display:grid;grid-template-columns:24mm 1fr 24mm;align-items:center;gap:4mm}.lh img{max-width:24mm;max-height:24mm;object-fit:contain}
+.lhc{text-align:center;font-size:11pt;line-height:1.5}.lh1{font-size:21pt;font-weight:800;line-height:1.3}
+.lrule{border-top:3px solid #000;border-bottom:1px solid #000;height:3px;margin:3mm 0 4mm}
+.ttl{text-align:center;font-size:15pt;font-weight:800;text-decoration:underline;margin:0 0 2mm}.dtl{text-align:right;font-size:11pt;margin-bottom:3mm}
+.sg{margin-top:18mm;text-align:right;font-weight:800;line-height:1.6;break-inside:avoid}
+.wrap{max-width:none;padding:0}.layout{display:block}.pane{display:none!important}.pane.on{display:block!important}
+.card{box-shadow:none;border:0;padding:0;background:none;margin-bottom:6mm}.card h2{color:#000;font-size:13pt;border-bottom:1px solid #000}
+table{font-size:11pt}th,td{border:1px solid #000}th{background:#e6e6e6!important;color:#000}tr.g td{background:#f2f2f2!important}tr{break-inside:avoid}
+.cards{perspective:none;gap:4mm}.hc{box-shadow:none;border:1px solid #000;border-top:3px solid #000;transform:none!important;break-inside:avoid}.hc b{color:#000}
+.bar{box-shadow:none;border:1px solid #000;background:#fff}.bar i{background:#777!important}
+.info{box-shadow:none;background:#fff!important;border:1px solid #000;border-left:5px solid #000;color:#000}
+.cube{box-shadow:none;transform:none;background:#fff!important;color:#000;border:2px solid #000}.neg,.pos{color:#000}}
+.dwrap{position:relative;display:flex;gap:6px;align-items:center}.dwrap .dtx{flex:1;min-width:0}.dpk{border:0;background:#fff;border-radius:9px;font-size:18px;padding:6px 9px;cursor:pointer;box-shadow:0 3px 0 #b9ab7d}.dhid{position:absolute;right:0;bottom:0;width:1px;height:1px;opacity:0;pointer-events:none;border:0;padding:0}
+.card .grid>div,.fb{background:#fff8e4;border:1.5px solid #d9cc9f;border-left:6px solid var(--g);border-radius:12px;padding:8px 10px 10px;box-shadow:0 4px 0 #cdbd8e}
+.card .grid>div label,.fb>label{color:var(--m);font-size:13px}
+.card .grid{gap:14px}
+.card h2{background:linear-gradient(#27a56f,var(--g));color:#fff;padding:8px 12px;border-radius:10px;box-shadow:0 3px 0 #073d27}
+.chips{display:flex;flex-wrap:wrap;gap:8px}.chips button{border:1.5px solid var(--g);background:#fff;color:var(--g);font:inherit;font-size:14px;font-weight:700;border-radius:20px;padding:6px 12px;cursor:pointer;box-shadow:0 3px 0 #b9ab7d}.chips button.on{background:var(--g);color:#fff}
+.c3{margin-top:12px}
+</style>
+</head>
+<body><!--DEMO-GUARD--><script>(function demoGuard(c){
+var NAME=c.name,MAX=c.max,KEY='demo_'+c.key,WA='919427914014',PH='9427914014',UPI='9427914014@slc',PAYEE='MR MODI ANANDBHAI',STORE='https://anandmodi5182-ops.github.io/tool-anand-active-/';
+function g(k){try{return localStorage.getItem(k)}catch(e){return null}}
+function s(k,v){try{localStorage.setItem(k,v)}catch(e){}}
+var sess=false;try{sess=sessionStorage.getItem(KEY)==='1'}catch(e){}
+var used=parseInt(g(KEY),10)||0,expired=false;
+if(!sess){if(used<MAX){used++;s(KEY,String(used));try{sessionStorage.setItem(KEY,'1')}catch(e){}}else expired=true}
+var left=Math.max(0,MAX-used);
+function esc(t){return String(t).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/"/g,'&quot;')}
+var F="'Noto Sans Gujarati',system-ui,sans-serif";
+var css='.dg-rb{position:fixed;top:22px;left:-46px;width:180px;padding:5px 0;background:#e11d48;color:#fff;font:800 13px/1 system-ui,sans-serif;letter-spacing:3px;text-align:center;transform:rotate(-45deg);z-index:2147483000;pointer-events:none;box-shadow:0 3px 10px #0005}'
++'.dg-wm{position:fixed;inset:0;z-index:2147482000;pointer-events:none}'
++'.dg-bar{position:fixed;left:50%;bottom:calc(10px + env(safe-area-inset-bottom,0px));transform:translateX(-50%);z-index:2147483001;display:flex;gap:10px;align-items:center;background:#1b1140ee;color:#fff;border:2px solid #ffd54a;border-radius:30px;padding:6px 7px 6px 14px;font:700 13px/1.2 '+F+';box-shadow:0 8px 24px #0007;white-space:nowrap;max-width:96vw}'
++'.dg-bar button,.dg-b,.dg-x{font:800 14px '+F+';border:0;border-radius:14px;cursor:pointer;text-decoration:none;display:block;text-align:center}'
++'.dg-bar button{background:#ffd54a;color:#2a1f00;padding:8px 14px;border-radius:22px}'
++'#dgBuy{position:fixed;inset:0;z-index:2147483647;display:none;overflow:auto;color:#fff;font-family:'+F+';background:linear-gradient(135deg,#1a0b4b,#4b1d8f,#0b3d6b,#1a0b4b);background-size:300% 300%;animation:dgbg 14s ease infinite}'
++'#dgBuy canvas{position:fixed;inset:0;width:100%;height:100%;pointer-events:none}'
++'.dg-sc{position:relative;min-height:100%;display:flex;flex-direction:column;align-items:center;justify-content:center;padding:18px 12px;perspective:1100px}'
++'.dg-cube{width:90px;height:90px;position:relative;transform-style:preserve-3d;animation:dgspin 9s linear infinite;margin:6px 0 24px}'
++'.dg-cube i{position:absolute;inset:0;display:grid;place-items:center;font-size:40px;font-style:normal;background:#ffffff22;border:2px solid #ffffff77;border-radius:14px}'
++'.dg-fl{width:min(440px,94vw);transform-style:preserve-3d;animation:dgfl 5s ease-in-out infinite}'
++'.dg-card{transform-style:preserve-3d;transform:rotateX(var(--rx,0deg)) rotateY(var(--ry,0deg));transition:transform .15s;background:linear-gradient(160deg,#ffffff2e,#ffffff10);border:2px solid #ffffff55;border-radius:26px;padding:20px 16px;text-align:center;box-shadow:0 30px 60px #0008,inset 0 0 40px #ffffff14;backdrop-filter:blur(8px)}'
++'.dg-card h2{margin:0;font-size:24px;transform:translateZ(50px);text-shadow:0 4px 0 #0006}'
++'.dg-tn{margin:6px 0;font-size:17px;font-weight:800;color:#9ff0ff;transform:translateZ(38px)}'
++'.dg-card p{margin:0 0 10px;font-size:14px;line-height:1.5;transform:translateZ(20px)}'
++'.dg-info{transform:translateZ(34px);background:#0b0630aa;border:2px dashed #ffd54a;border-radius:16px;padding:12px;margin:8px 0 12px}'
++'.dg-nm{font-size:21px;font-weight:800;color:#ffd54a}.dg-ph{font-size:22px;font-weight:800;margin:4px 0}'
++'.dg-up{display:flex;justify-content:space-between;align-items:center;gap:8px;font-size:13px;word-break:break-all}'
++'.dg-up button{background:#ffd54a;color:#2a1f00;border:0;border-radius:10px;padding:5px 10px;font:800 12px '+F+'}'
++'.dg-bt{display:grid;gap:9px;transform:translateZ(26px)}.dg-b{padding:13px;color:#fff}'
++'.dg-x{margin:12px auto 0;background:#ffffff22;color:#fff;padding:9px 18px}'
++'@keyframes dgbg{50%{background-position:100% 50%}}@keyframes dgspin{from{transform:rotateX(-20deg) rotateY(0)}to{transform:rotateX(-20deg) rotateY(360deg)}}@keyframes dgfl{50%{transform:translateY(-12px)}}'
++'@media (prefers-reduced-motion:reduce){#dgBuy,.dg-cube,.dg-fl{animation:none}}';
+var st=document.createElement('style');st.textContent=css;document.head.appendChild(st);
+try{document.title='[DEMO] '+document.title}catch(e){}
+function mk(cls,html){var d=document.createElement('div');if(cls)d.className=cls;if(html)d.innerHTML=html;document.body.appendChild(d);return d}
+mk('dg-rb','DEMO');
+var wm=mk('dg-wm'),svg="<svg xmlns='http://www.w3.org/2000/svg' width='260' height='190'><text x='130' y='105' font-family='Arial' font-weight='900' font-size='38' fill='#e11d48' fill-opacity='0.10' text-anchor='middle' transform='rotate(-24 130 95)'>DEMO</text></svg>";
+wm.style.backgroundImage='url("data:image/svg+xml;utf8,'+encodeURIComponent(svg)+'")';
+var bar=mk('dg-bar','<span>🎬 DEMO · બાકી ઉપયોગ: '+left+' / '+MAX+'</span><button type="button" id="dgOpen">🛒 ખરીદો</button>');
+var face=['translateZ(45px)','rotateY(90deg) translateZ(45px)','rotateY(180deg) translateZ(45px)','rotateY(-90deg) translateZ(45px)','rotateX(90deg) translateZ(45px)','rotateX(-90deg) translateZ(45px)'],ic=['🛒','🔑','✅','💰','📄','🔒'];
+var cube=ic.map(function(e,i){return '<i style="transform:'+face[i]+'">'+e+'</i>'}).join('');
+var wa='https://wa.me/'+WA+'?text='+encodeURIComponent('નમસ્તે, મારે આ ટૂલ ખરીદવું છે: '+NAME+'\n(Demo જોયો છે)');
+var upi='upi://pay?pa='+UPI+'&pn='+encodeURIComponent(PAYEE)+'&cu=INR&tn='+encodeURIComponent(NAME);
+var ov=mk('','');ov.id='dgBuy';
+ov.innerHTML='<canvas id="dgCv"></canvas><div class="dg-sc"><div class="dg-cube">'+cube+'</div><div class="dg-fl"><div class="dg-card" id="dgCard"><h2>'+(expired?'🔒 Demo પૂરો થયો':'🛒 ટૂલ ખરીદો')+'</h2><div class="dg-tn">'+esc(NAME)+'</div><p>'+(expired?'આ ટૂલનો Demo ('+MAX+' ઉપયોગ) પૂરો થયો. આખું ટૂલ ચાલુ રાખવા ખરીદો.':'Demo માં બાકી ઉપયોગ: '+left+'. આખું ટૂલ ખરીદવા સંપર્ક કરો.')+'</p><div class="dg-info"><div class="dg-nm">SHRI ANANDBHAI MODI</div><div class="dg-ph">📞 '+PH+'</div><div class="dg-up"><span>UPI: <b>'+UPI+'</b></span><button type="button" id="dgCp">📋 Copy</button></div></div><div class="dg-bt"><a class="dg-b" style="background:#25d366" target="_blank" rel="noopener" href="'+wa+'">💬 WhatsApp પર ખરીદો</a><a class="dg-b" style="background:#f59e0b" href="'+upi+'">📲 UPI App થી ચૂકવો</a><a class="dg-b" style="background:#2563eb" href="tel:'+PH+'">📞 કૉલ કરો</a><a class="dg-b" style="background:#7c3aed" target="_blank" rel="noopener" href="'+STORE+'">🌐 બધાં ટૂલ જુઓ</a></div>'+(expired?'':'<button type="button" class="dg-x" id="dgX">✖ બંધ કરો</button>')+'</div></div></div>';
+var raf=0,stars=[],cv,cx;
+function rs(){cv.width=innerWidth;cv.height=innerHeight}
+function nw(r){return{x:Math.random()*2-1,y:Math.random()*2-1,z:r?Math.random():1,c:Math.random()<.2?'#ffd54a':'#fff'}}
+function loop(){cx.clearRect(0,0,cv.width,cv.height);var w=cv.width/2,h=cv.height/2;
+ stars.forEach(function(p,i){p.z-=.004;if(p.z<=.03)stars[i]=p=nw(false);var px=w+p.x*w*.35/p.z,py=h+p.y*h*.35/p.z;
+  if(px<0||py<0||px>cv.width||py>cv.height){stars[i]=nw(false);return}
+  cx.fillStyle=p.c;cx.globalAlpha=1-p.z*.6;cx.beginPath();cx.arc(px,py,(1-p.z)*3+.3,0,6.3);cx.fill()});
+ raf=requestAnimationFrame(loop)}
+function show(){ov.style.display='block';document.documentElement.style.overflow='hidden';cv=document.getElementById('dgCv');cx=cv.getContext('2d');rs();if(!stars.length)for(var i=0;i<120;i++)stars.push(nw(true));cancelAnimationFrame(raf);loop()}
+function hide(){ov.style.display='none';document.documentElement.style.overflow='';cancelAnimationFrame(raf)}
+addEventListener('resize',function(){if(cv)rs()});
+var card=document.getElementById('dgCard');
+ov.addEventListener('pointermove',function(e){var r=card.getBoundingClientRect();card.style.setProperty('--ry',((e.clientX-r.left-r.width/2)/innerWidth*28)+'deg');card.style.setProperty('--rx',(-(e.clientY-r.top-r.height/2)/innerHeight*28)+'deg')});
+ov.addEventListener('pointerleave',function(){card.style.setProperty('--rx','0deg');card.style.setProperty('--ry','0deg')});
+document.getElementById('dgCp').onclick=function(){var b=this;function d(){b.textContent='✔ કૉપિ';setTimeout(function(){b.textContent='📋 Copy'},1400)}if(navigator.clipboard)navigator.clipboard.writeText(UPI).then(d,function(){});else d()};
+document.getElementById('dgOpen').onclick=show;
+var x=document.getElementById('dgX');if(x)x.onclick=hide;
+if(expired){bar.style.display='none';show()}
+})({"name":"ગ્રાન્ટ ખર્ચ હિસાબ","key":"GRANT_HISAB","max":2});</script>
+<div class="top">SHRI ANANDBHAI MODI-9427914014</div>
+<div class="school" id="sch"></div>
+<table class="pt"><thead><tr><td><div id="lpH"></div></td></tr></thead><tbody><tr><td><div id="lpT"></div>
+<div class="wrap">
+<h1>📒 ગ્રાન્ટ ખર્ચ હિસાબ (શાળા / CRC / BRC માટે)</h1>
+<p class="sub">મળેલી ગ્રાન્ટ હેડ મુજબ નાખો → તારીખ મુજબ ખર્ચ લખો (બિલ / વાઉચર) → રકમ આપમેળે ગ્રાન્ટમાંથી બાદ થશે. બધી વિગત આ બ્રાઉઝરમાં યાદ રહેશે.</p>
+
+<div class="layout">
+<div class="tabs">
+<button data-t="sum" class="on">📊 સરવૈયું</button>
+<button data-t="gr">💰 ગ્રાન્ટ મળી</button>
+<button data-t="ex">🧾 ખર્ચ લખો</button>
+<button data-t="led">📖 ખાતાવહી</button>
+<button data-t="calc">🧮 ૬૦-૪૦</button>
+<button data-t="pf">🏫 વિગત</button>
+<button data-t="bk">💾 બેકઅપ</button>
+</div>
+<div class="main">
+
+<!-- સરવૈયું -->
+<div class="pane on print" id="p-sum">
+<div class="info" id="totInfo"></div>
+<div class="cards" id="headCards"></div>
+</div>
+
+<!-- ગ્રાન્ટ -->
+<div class="pane" id="p-gr">
+<div class="card noprint"><h2 id="gTitle">નવી ગ્રાન્ટ ઉમેરો</h2>
+<div class="grid">
+<div><label>ગ્રાન્ટ હેડ (નવું નામ પણ લખી શકાય)</label><input id="gHead" autocomplete="off" autocapitalize="off" spellcheck="false" placeholder="દા.ત. શાળા ગ્રાન્ટ / SMC ગ્રાન્ટ"></div>
+<div><label>મળ્યાની તારીખ</label><div class="dwrap"><input type="text" id="gDate" class="dtx" inputmode="numeric" maxlength="10" placeholder="dd/mm/yyyy" autocomplete="off"><button type="button" class="dpk" data-for="gDate" aria-label="Calendar">📅</button><input type="date" class="dhid" tabindex="-1" aria-hidden="true"></div></div>
+<div><label>રકમ ₹</label><input type="number" id="gAmt" min="0" step="0.01" inputmode="decimal"></div>
+<div><label>નોંધ (ચેક/Claim નં.)</label><input id="gNote"></div>
+</div>
+<div class="tools"><button class="btn" id="gSave">➕ ગ્રાન્ટ ઉમેરો</button><button class="btn gold" id="gCancel" style="display:none">રદ</button></div>
+<div class="fb" style="margin-top:10px"><label>ઝડપી હેડ પસંદગી (દબાવો એટલે ઉપર લખાઈ જશે)</label><div class="chips" id="gChips"></div></div>
+</div>
+<div class="card"><h2>મળેલી ગ્રાન્ટની યાદી</h2><div class="tw" id="gList"></div></div>
+</div>
+
+<!-- ખર્ચ -->
+<div class="pane" id="p-ex">
+<div class="card noprint"><h2 id="eTitle">નવો ખર્ચ લખો</h2>
+<div class="grid">
+<div><label>ખર્ચની તારીખ</label><div class="dwrap"><input type="text" id="eDate" class="dtx" inputmode="numeric" maxlength="10" placeholder="dd/mm/yyyy" autocomplete="off"><button type="button" class="dpk" data-for="eDate" aria-label="Calendar">📅</button><input type="date" class="dhid" tabindex="-1" aria-hidden="true"></div></div>
+<div><label>કઈ ગ્રાન્ટ હેડમાંથી</label><select id="eHead"></select></div>
+<div><label>પ્રકાર</label><div class="seg" id="eType"><button data-v="બિલ" class="on">🧾 બિલ</button><button data-v="વાઉચર">📄 વાઉચર</button></div></div>
+<div><label id="eNoL">બિલ નંબર</label><input id="eNo"></div>
+<div><label>રકમ ₹</label><input type="number" id="eAmt" min="0" step="0.01" inputmode="decimal"></div>
+</div>
+<div class="fb" style="margin-top:10px"><label>વિગત (શેનો ખર્ચ / કોને ચૂકવ્યા)</label><input id="eDet" placeholder="દા.ત. રંગકામ – શ્રી રમેશ પેઈન્ટર"></div>
+<div class="info" id="eInfo">હેડ પસંદ કરો</div>
+<div class="tools"><button class="btn" id="eSave">➕ ખર્ચ સાચવો</button><button class="btn gold" id="eCancel" style="display:none">રદ</button></div>
+</div>
+<div class="card"><h2>તાજેતરના ખર્ચ</h2><div class="tw" id="eList"></div></div>
+</div>
+
+<!-- ખાતાવહી -->
+<div class="pane print" id="p-led">
+<div class="card noprint"><div class="grid">
+<div><label>હેડ</label><select id="lHead"></select></div>
+<div><label>પ્રકાર</label><select id="lType"><option value="">બધા</option><option>બિલ</option><option>વાઉચર</option></select></div>
+<div><label>તારીખથી</label><div class="dwrap"><input type="text" id="lFrom" class="dtx" inputmode="numeric" maxlength="10" placeholder="dd/mm/yyyy" autocomplete="off"><button type="button" class="dpk" data-for="lFrom" aria-label="Calendar">📅</button><input type="date" class="dhid" tabindex="-1" aria-hidden="true"></div></div>
+<div><label>તારીખ સુધી</label><div class="dwrap"><input type="text" id="lTo" class="dtx" inputmode="numeric" maxlength="10" placeholder="dd/mm/yyyy" autocomplete="off"><button type="button" class="dpk" data-for="lTo" aria-label="Calendar">📅</button><input type="date" class="dhid" tabindex="-1" aria-hidden="true"></div></div>
+</div></div>
+<div class="card"><h2 id="lTitle">ખાતાવહી</h2><div class="tw" id="lTab"></div></div>
+</div>
+
+<!-- ૬૦-૪૦ -->
+<div class="pane" id="p-calc">
+<div class="card"><h2>ગ્રાન્ટ ૬૦% – ૪૦% કેલ્ક્યુલેટર</h2>
+<div class="fb"><label>ગ્રાન્ટની કુલ રકમ ₹</label><input type="number" id="cAmt" min="0" step="0.01" inputmode="decimal" placeholder="રકમ લખો"></div>
+<div class="c3"><div class="cube">કેન્દ્ર ૬૦%<b id="c60">₹ 0</b></div><div class="cube b">રાજ્ય ૪૦%<b id="c40">₹ 0</b></div></div>
+<div class="tot">કુલ: <span id="cTot">₹ 0</span></div>
+<div class="tools"><button class="btn gold" id="cGo">💰 આ રકમ ગ્રાન્ટમાં ઉમેરવા જાઓ</button></div></div>
+</div>
+
+<!-- શાળા -->
+<div class="pane" id="p-pf">
+<div class="card"><h2>🏫 તમારી અને કચેરી / શાળાની વિગત</h2>
+<div class="grid"><div><label>તમારો હોદ્દો</label><select id="pRole"><option>આચાર્ય</option><option>CRC</option><option>BRC</option><option>BRP</option><option>TPEO</option><option>અન્ય</option></select></div>
+<div id="pRoleOW" style="display:none"><label>હોદ્દો લખો</label><input id="pRoleO" placeholder="દા.ત. ક્લાર્ક"></div>
+<div><label id="pSchL">શાળાનું નામ</label><input id="pSch" placeholder="દા.ત. શ્રી ....... પ્રાથમિક શાળા"></div>
+<div><label id="pPrL">આચાર્યનું નામ</label><input id="pPr" placeholder="શ્રી ......."></div>
+<div><label>સરનામું / તાલુકો / જિલ્લો (લેટરપેડ માટે)</label><input id="pAddr"></div>
+<div><label>UDISE / કચેરી કોડ</label><input id="pCode"></div>
+<div><label>ફોન નંબર</label><input id="pPh" inputmode="tel"></div>
+<div><label>લોગો (વૈકલ્પિક)</label><input type="file" id="pLogo" accept="image/*"><div id="pLogoP"></div></div></div>
+<div class="info">આ વિગત પ્રિન્ટમાં લેટરપેડ (શાળા/કચેરીનું નામ, સરનામું, લોગો) તરીકે ઉપર આવશે અને સહી નીચે જમણી બાજુ આવશે.</div>
+<div class="tools"><button class="btn" id="pSave">✔️ સાચવો</button></div></div>
+</div>
+
+<!-- બેકઅપ -->
+<div class="pane" id="p-bk">
+<div class="card"><h2>📲 મોબાઈલમાં App તરીકે વાપરો</h2>
+<p>Android Chrome: નીચેનું બટન દબાવો (ન દેખાય તો ⋮ મેનુ → <b>Install app / Add to Home screen</b>). iPhone: Safari → Share → <b>Add to Home Screen</b>. પછી હોમ સ્ક્રીન પર આઈકન આવશે અને ઇન્ટરનેટ વગર પણ ચાલશે.</p>
+<div class="tools"><button class="btn gold" id="instBtn" style="display:none">📲 App Install કરો</button></div></div>
+<div class="card"><h2>બેકઅપ / રિસ્ટોર</h2>
+<p>☁️ મોબાઈલમાં બટન દબાવી "Drive" પસંદ કરો. કમ્પ્યુટરમાં ફાઈલ ડાઉનલોડ થશે અને Google Drive ખુલશે – ત્યાં અપલોડ કરો. પાછું લાવવા "⬆️ બેકઅપ પાછું લાવો" માં Drive માંથી ફાઈલ પસંદ કરો.<br>ડેટા આ બ્રાઉઝરમાં સેવ થાય છે. બ્રાઉઝર ડેટા ભૂંસો કે બીજા કમ્પ્યુટર પર જાઓ તો બેકઅપ ફાઈલ કામ લાગશે.</p>
+<div class="tools"><button class="btn gold" id="bkDrive">☁️ Google Drive માં સેવ</button><button class="btn" id="bkDl">⬇️ બેકઅપ ડાઉનલોડ</button>
+<label class="btn gold" style="margin:0">⬆️ બેકઅપ પાછું લાવો<input type="file" id="bkUp" style="display:none"></label>
+<button class="btn red" id="bkClr">🗑️ બધો ડેટા ભૂંસો</button></div></div>
+</div>
+</div></div>
+</div>
+<div id="lpS"></div></td></tr></tbody><tfoot><tr><td><div class="sp"></div></td></tr></tfoot></table>
+<div id="lpB"></div><div id="lpF">SHRI ANANDBHAI MODI-9427914014</div>
+<div id="toast" class="noprint"></div>
+
+<script>
+var K='principalGrantBook',D={grants:[],exp:[]},gEdit=null,eEdit=null,eT='બિલ';
+try{var x=JSON.parse(localStorage.getItem(K)||'null');if(x&&x.grants&&x.exp)D=x}catch(e){}
+function fixProf(){D.prof=D.prof||{};D.prof.school=D.prof.school||'';D.prof.principal=D.prof.principal||'';D.prof.role=D.prof.role||'આચાર્ય';D.prof.roleO=D.prof.roleO||'';['addr','code','ph','logo'].forEach(function(k){D.prof[k]=D.prof[k]||''})}fixProf();
+var LS_OK=true;try{localStorage.setItem('_t','1');localStorage.removeItem('_t')}catch(e){LS_OK=false}
+function save(){try{localStorage.setItem(K,JSON.stringify(D))}catch(e){alert('સેવ થયું નહીં – બેકઅપ ડાઉનલોડ કરો')}}
+var $=function(i){return document.getElementById(i)};
+function esc(t){return String(t==null?'':t).replace(/[&<>"]/g,function(c){return{'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]})}
+function m(n){return '₹ '+(Math.round(n*100)/100).toLocaleString('en-IN')}
+function dt(d){if(!d)return '';var p=d.split('-');return p[2]+'/'+p[1]+'/'+p[0]}
+function getD(id){var v=$(id).value.trim(),m=v.match(/^(\d{1,2})[\/\-.](\d{1,2})[\/\-.](\d{4})$/);if(!m)return '';var d=+m[1],mo=+m[2],y=+m[3],t=new Date(y,mo-1,d);if(t.getFullYear()!==y||t.getMonth()!==mo-1||t.getDate()!==d)return '';var p=function(n){return String(n).padStart(2,'0')};return y+'-'+p(mo)+'-'+p(d)}
+function setD(id,iso){$(id).value=iso?dt(iso):''}
+function maskD(e){var el=e.target,d=el.value.replace(/\D/g,'').slice(0,8),o=d.slice(0,2);if(d.length>2)o+='/'+d.slice(2,4);if(d.length>4)o+='/'+d.slice(4);el.value=o}
+document.querySelectorAll('.dtx').forEach(function(el){el.addEventListener('input',maskD)});
+document.querySelectorAll('.dpk').forEach(function(b){var tx=document.getElementById(b.dataset.for),h=b.parentNode.querySelector('.dhid');b.onclick=function(){h.value=getD(b.dataset.for)||'';try{h.showPicker()}catch(e){h.focus();h.click()}};h.addEventListener('change',function(){setD(b.dataset.for,h.value);tx.dispatchEvent(new Event('input',{bubbles:true}))})});
+function today(){var d=new Date(),p=function(n){return String(n).padStart(2,'0')};return d.getFullYear()+'-'+p(d.getMonth()+1)+'-'+p(d.getDate())}
+function uid(){return Date.now().toString(36)+Math.random().toString(36).slice(2,6)}
+function heads(){var h=[];D.grants.concat(D.exp).forEach(function(r){if(r.head&&h.indexOf(r.head)<0)h.push(r.head)});return h}
+function tot(h){var g=0,e=0,b=0,v=0;D.grants.forEach(function(r){if(r.head===h)g+=+r.amt});
+ D.exp.forEach(function(r){if(r.head===h){e+=+r.amt;r.type==='બિલ'?b++:v++}});return{g:g,e:e,bal:g-e,b:b,v:v}}
+
+/* tabs */
+document.querySelectorAll('.tabs button').forEach(function(b){b.onclick=function(){
+ document.querySelectorAll('.tabs button').forEach(function(x){x.classList.toggle('on',x===b)});
+ document.querySelectorAll('.pane').forEach(function(p){p.classList.toggle('on',p.id==='p-'+b.dataset.t)});render()}});
+
+/* grant */
+$('gSave').onclick=function(){
+ var h=$('gHead').value.trim(),a=parseFloat($('gAmt').value);
+ if(!h||!(a>0)){alert('હેડનું નામ અને રકમ લખો');return}
+ if($('gDate').value.trim()&&!getD('gDate')){alert('તારીખ dd/mm/yyyy ફોર્મેટમાં લખો (જેમ કે 25/12/2026)');return}
+ var r={id:gEdit||uid(),head:h,date:getD('gDate')||today(),amt:a,note:$('gNote').value.trim()};
+ if(gEdit){var i=D.grants.findIndex(function(x){return x.id===gEdit});D.grants[i]=r}else D.grants.push(r);
+ gEdit=null;$('gHead').value=$('gAmt').value=$('gNote').value='';$('gTitle').textContent='નવી ગ્રાન્ટ ઉમેરો';
+ $('gSave').textContent='➕ ગ્રાન્ટ ઉમેરો';$('gCancel').style.display='none';save();render()};
+$('gCancel').onclick=function(){gEdit=null;$('gHead').value=$('gAmt').value=$('gNote').value='';headChips();$('gTitle').textContent='નવી ગ્રાન્ટ ઉમેરો';$('gSave').textContent='➕ ગ્રાન્ટ ઉમેરો';this.style.display='none'};
+function gEd(id){var r=D.grants.find(function(x){return x.id===id});gEdit=id;$('gHead').value=r.head;setD('gDate',r.date);$('gAmt').value=r.amt;$('gNote').value=r.note;
+ $('gTitle').textContent='ગ્રાન્ટ સુધારો';$('gSave').textContent='✔️ સુધારો સાચવો';$('gCancel').style.display='';window.scrollTo(0,0)}
+function gDel(id){if(confirm('આ ગ્રાન્ટ કાઢી નાખવી છે?')){D.grants=D.grants.filter(function(x){return x.id!==id});save();render()}}
+
+/* expense */
+document.querySelectorAll('#eType button').forEach(function(b){b.onclick=function(){eT=b.dataset.v;setType()}});
+function setType(){document.querySelectorAll('#eType button').forEach(function(b){b.classList.toggle('on',b.dataset.v===eT)});$('eNoL').textContent=eT+' નંબર'}
+['eHead','eAmt'].forEach(function(i){$(i).addEventListener('input',eInfo)});
+function eInfo(){var h=$('eHead').value,el=$('eInfo');if(!h){el.className='info bad';el.textContent='પહેલા "ગ્રાન્ટ મળી" માં ગ્રાન્ટ ઉમેરો';return}
+ var t=tot(h),a=parseFloat($('eAmt').value)||0,old=0;if(eEdit){var o=D.exp.find(function(x){return x.id===eEdit});if(o&&o.head===h)old=+o.amt}
+ var cur=t.bal+old,after=cur-a;el.className='info'+(after<0?' bad':'');
+ el.innerHTML='ગ્રાન્ટ '+m(t.g)+' · ખર્ચ '+m(t.e-old)+' · <b>અત્યારે બાકી '+m(cur)+'</b>'+(a?' → આ ખર્ચ પછી બાકી <b>'+m(after)+'</b>'+(after<0?' ⚠️ ગ્રાન્ટ કરતાં વધુ ખર્ચ!':''):'')}
+$('eSave').onclick=function(){
+ var h=$('eHead').value,a=parseFloat($('eAmt').value);
+ if(!h||!(a>0)){alert('હેડ પસંદ કરો અને રકમ લખો');return}
+ var old=0;if(eEdit){var o=D.exp.find(function(x){return x.id===eEdit});if(o&&o.head===h)old=+o.amt}
+ if(tot(h).bal+old-a<0&&!confirm('આ ખર્ચ ગ્રાન્ટ કરતાં વધી જાય છે. છતાં સાચવવો છે?'))return;
+ if($('eDate').value.trim()&&!getD('eDate')){alert('તારીખ dd/mm/yyyy ફોર્મેટમાં લખો (જેમ કે 25/12/2026)');return}
+ var r={id:eEdit||uid(),head:h,date:getD('eDate')||today(),type:eT,no:$('eNo').value.trim(),detail:$('eDet').value.trim(),amt:a};
+ if(eEdit){var i=D.exp.findIndex(function(x){return x.id===eEdit});D.exp[i]=r}else D.exp.push(r);
+ eEdit=null;$('eNo').value=$('eAmt').value=$('eDet').value='';$('eTitle').textContent='નવો ખર્ચ લખો';$('eSave').textContent='➕ ખર્ચ સાચવો';$('eCancel').style.display='none';
+ save();render()};
+$('eCancel').onclick=function(){eEdit=null;$('eNo').value=$('eAmt').value=$('eDet').value='';$('eTitle').textContent='નવો ખર્ચ લખો';$('eSave').textContent='➕ ખર્ચ સાચવો';this.style.display='none';eInfo()};
+function eEd(id){var r=D.exp.find(function(x){return x.id===id});eEdit=id;eT=r.type;setType();setD('eDate',r.date);$('eHead').value=r.head;$('eNo').value=r.no;$('eDet').value=r.detail;$('eAmt').value=r.amt;
+ $('eTitle').textContent='ખર્ચ સુધારો';$('eSave').textContent='✔️ સુધારો સાચવો';$('eCancel').style.display='';eInfo();window.scrollTo(0,0)}
+function eDel(id){if(confirm('આ ખર્ચ કાઢી નાખવો છે? રકમ ગ્રાન્ટમાં પાછી ઉમેરાશે.')){D.exp=D.exp.filter(function(x){return x.id!==id});save();render()}}
+
+/* render */
+function opts(sel,all){var h=heads(),v=sel.value;sel.innerHTML=(all?'<option value="">— હેડ પસંદ કરો —</option>':'')+h.map(function(x){return'<option>'+esc(x)+'</option>'}).join('');if(h.indexOf(v)>=0)sel.value=v}
+function headChips(){var base=['શાળા ગ્રાન્ટ','SMC ગ્રાન્ટ','મરામત / મેન્ટેનન્સ','TLM ગ્રાન્ટ','રમતગમત ગ્રાન્ટ','વિજ્ઞાન ગ્રાન્ટ'],all=base.concat(heads().filter(function(x){return base.indexOf(x)<0})),el=$('gChips'),v=$('gHead').value.trim();el.innerHTML=all.map(function(x){return'<button type="button" data-v="'+esc(x)+'"'+(x===v?' class="on"':'')+'>'+esc(x)+'</button>'}).join('')}
+$('gChips').addEventListener('click',function(e){var b=e.target.closest('button');if(!b)return;$('gHead').value=b.dataset.v;headChips()});
+$('gHead').addEventListener('input',function(){var v=this.value.trim();document.querySelectorAll('#gChips button').forEach(function(b){b.classList.toggle('on',b.dataset.v===v)})});
+function render(){headChips();
+ opts($('eHead'),true);opts($('lHead'),true);setType();
+ var H=heads(),G=0,E=0;H.forEach(function(h){var t=tot(h);G+=t.g;E+=t.e});
+ $('totInfo').className='info'+(G-E<0?' bad':'');
+ $('totInfo').innerHTML='કુલ ગ્રાન્ટ '+m(G)+' · કુલ ખર્ચ '+m(E)+' · <b>કુલ બાકી '+m(G-E)+'</b>';
+ $('headCards').innerHTML=H.length?H.map(function(h){var t=tot(h),p=t.g?Math.min(100,t.e/t.g*100):0;
+  return'<div class="hc"><b>'+esc(h)+'</b><div class="bar"><i style="width:'+p+'%"></i></div>'+
+  '<div class="r"><span>મળેલી ગ્રાન્ટ</span><b>'+m(t.g)+'</b></div><div class="r"><span>ખર્ચ</span><b>'+m(t.e)+'</b></div>'+
+  '<div class="r"><span>બાકી ગ્રાન્ટ</span><span class="'+(t.bal<0?'neg':'pos')+'">'+m(t.bal)+'</span></div>'+
+  '<div class="r"><span>બિલ '+t.b+' · વાઉચર '+t.v+'</span><span>'+p.toFixed(0)+'% વપરાયું</span></div></div>'}).join(''):'<div class="empty">હજી કોઈ ગ્રાન્ટ ઉમેરી નથી. "💰 ગ્રાન્ટ મળી" માં જઈને શરૂ કરો.</div>';
+ var gs=D.grants.slice().sort(function(a,b){return b.date.localeCompare(a.date)});
+ $('gList').innerHTML=gs.length?'<table><tr><th>તારીખ</th><th>હેડ</th><th>નોંધ</th><th class="n">રકમ</th><th class="noprint"></th></tr>'+gs.map(function(r){return'<tr><td>'+dt(r.date)+'</td><td>'+esc(r.head)+'</td><td>'+esc(r.note)+'</td><td class="n">'+m(r.amt)+'</td><td class="noprint"><button class="btn sm gold" onclick="gEd(\''+r.id+'\')">✏️</button> <button class="btn sm red" onclick="gDel(\''+r.id+'\')">🗑️</button></td></tr>'}).join('')+'</table>':'<div class="empty">કોઈ ગ્રાન્ટ નથી</div>';
+ var es=D.exp.slice().sort(function(a,b){return b.date.localeCompare(a.date)});
+ $('eList').innerHTML=es.length?'<table><tr><th>તારીખ</th><th>હેડ</th><th>પ્રકાર / નં.</th><th>વિગત</th><th class="n">રકમ</th><th class="noprint"></th></tr>'+es.map(function(r){return'<tr><td>'+dt(r.date)+'</td><td>'+esc(r.head)+'</td><td>'+esc(r.type)+' '+esc(r.no)+'</td><td>'+esc(r.detail)+'</td><td class="n">'+m(r.amt)+'</td><td class="noprint"><button class="btn sm gold" onclick="eEd(\''+r.id+'\')">✏️</button> <button class="btn sm red" onclick="eDel(\''+r.id+'\')">🗑️</button></td></tr>'}).join('')+'</table>':'<div class="empty">હજી કોઈ ખર્ચ લખ્યો નથી</div>';
+ eInfo();ledger();renderSch()}
+
+/* ledger: date-wise, running balance per head */
+['lHead','lType','lFrom','lTo'].forEach(function(i){$(i).addEventListener('input',ledger)});
+function ledger(){
+ var h=$('lHead').value,ty=$('lType').value,f=getD('lFrom'),t=getD('lTo');
+ if(!h){$('lTitle').textContent='ખાતાવહી';$('lTab').innerHTML='<div class="empty">હેડ પસંદ કરો</div>';return}
+ var rows=[];D.grants.forEach(function(r){if(r.head===h)rows.push({d:r.date,k:'g',t:'ગ્રાન્ટ મળી',n:r.note,det:'',a:+r.amt})});
+ D.exp.forEach(function(r){if(r.head===h)rows.push({d:r.date,k:'e',t:r.type,n:r.no,det:r.detail,a:+r.amt})});
+ rows.sort(function(a,b){return a.d.localeCompare(b.d)||(a.k==='g'?-1:1)});
+ var bal=0,out=[],te=0,tb=0,tv=0;
+ rows.forEach(function(r){bal+=r.k==='g'?r.a:-r.a;r.bal=bal;
+  if((f&&r.d<f)||(t&&r.d>t))return;if(ty&&r.k==='e'&&r.t!==ty)return;if(ty&&r.k==='g')return;
+  if(r.k==='e'){te+=r.a;r.t==='બિલ'?tb++:tv++}out.push(r)});
+ var T=tot(h);
+ $('lTitle').textContent='ખાતાવહી – '+h;
+ $('lTab').innerHTML='<table><tr><th>તારીખ</th><th>પ્રકાર</th><th>નં. / નોંધ</th><th>વિગત</th><th class="n">જમા (ગ્રાન્ટ)</th><th class="n">ઉધાર (ખર્ચ)</th><th class="n">બાકી</th></tr>'+
+ out.map(function(r){return'<tr class="'+(r.k==='g'?'g':'')+'"><td>'+dt(r.d)+'</td><td>'+esc(r.t)+'</td><td>'+esc(r.n)+'</td><td>'+esc(r.det)+'</td><td class="n">'+(r.k==='g'?m(r.a):'')+'</td><td class="n">'+(r.k==='e'?m(r.a):'')+'</td><td class="n '+(r.bal<0?'neg':'')+'">'+m(r.bal)+'</td></tr>'}).join('')+
+ '<tr><th colspan="4">કુલ (બિલ '+tb+' · વાઉચર '+tv+')</th><th class="n">'+m(T.g)+'</th><th class="n">'+m(T.e)+'</th><th class="n">'+m(T.bal)+'</th></tr></table>'}
+
+/* backup */
+$('bkDl').onclick=function(){var a=document.createElement('a');a.href=URL.createObjectURL(new Blob([JSON.stringify(D)],{type:'application/json'}));a.download='grant_hisab_backup_'+today()+'.json';a.click()};
+$('bkUp').onchange=function(e){var inp=e.target,f=inp.files[0];if(!f)return;var r=new FileReader();r.onload=function(){inp.value='';try{var x=JSON.parse(String(r.result).replace(/^\uFEFF/,''));if(!Array.isArray(x.grants)||!Array.isArray(x.exp))throw 0;if(confirm('બેકઅપમાં '+x.grants.length+' ગ્રાન્ટ અને '+x.exp.length+' ખર્ચ છે. હાલનો ડેટા બદલાઈ જશે. ચાલુ રાખવું?')){D=x;fixProf();gEdit=eEdit=null;save();loadPf();render();alert('બેકઅપ પાછું આવ્યું ✔️')}}catch(er){alert('આ બેકઅપ ફાઈલ સાચી નથી')}};r.onerror=function(){inp.value='';alert('ફાઈલ વંચાઈ નહીં')};r.readAsText(f)};
+$('bkClr').onclick=function(){if(confirm('બધો ડેટા કાયમ માટે ભૂંસાઈ જશે! પહેલા બેકઅપ લીધું છે?')){D={grants:[],exp:[],prof:D.prof};save();render()}};
+
+/* school details */
+function rl(){return D.prof.role==='અન્ય'?(D.prof.roleO||'અન્ય'):D.prof.role}
+function isSch(){return D.prof.role==='આચાર્ય'}
+$('pLogo').onchange=function(e){var f=e.target.files[0];if(!f)return;var r=new FileReader();r.onload=function(){var im=new Image();im.onload=function(){var k=Math.min(1,220/Math.max(im.width,im.height)),c=document.createElement('canvas');c.width=Math.round(im.width*k);c.height=Math.round(im.height*k);c.getContext('2d').drawImage(im,0,0,c.width,c.height);D.prof.logo=c.toDataURL('image/png');save();pfLogo()};im.src=r.result};r.readAsDataURL(f)};
+function pfLab(){var r=$('pRole').value,o=$('pRoleO').value.trim()||'અન્ય';$('pRoleOW').style.display=r==='અન્ય'?'':'none';
+ $('pSchL').textContent=r==='આચાર્ય'?'શાળાનું નામ':r==='CRC'?'CRC (ક્લસ્ટર) નું નામ':(r==='BRC'||r==='BRP')?'BRC કચેરીનું નામ':'કચેરી / સંસ્થાનું નામ';
+ $('pPrL').textContent=(r==='અન્ય'?o:r)+' નું નામ'}
+$('pRole').addEventListener('change',pfLab);$('pRoleO').addEventListener('input',pfLab);
+function loadPf(){$('pRole').value=D.prof.role;$('pRoleO').value=D.prof.roleO;$('pSch').value=D.prof.school;$('pPr').value=D.prof.principal;$('pAddr').value=D.prof.addr;$('pCode').value=D.prof.code;$('pPh').value=D.prof.ph;pfLab();pfLogo()}
+function pfLogo(){$('pLogoP').innerHTML=D.prof.logo?'<img src="'+D.prof.logo+'" style="height:56px;margin-top:6px"> <button class="btn sm red" onclick="D.prof.logo=\'\';save();pfLogo()">❌ કાઢો</button>':''}
+function renderSch(){var p=D.prof,el=$('sch');el.className='school'+(p.school||p.principal?'':' noprint');
+ el.innerHTML=p.school||p.principal?(isSch()?'🏫 ':'🏢 ')+esc(p.school)+' &nbsp;|&nbsp; 👤 '+esc(rl())+': '+esc(p.principal):'તમારો હોદ્દો અને નામ "🏫 વિગત" ટેબમાં લખો'}
+$('pSave').onclick=function(){D.prof={role:$('pRole').value,roleO:$('pRoleO').value.trim(),school:$('pSch').value.trim(),principal:$('pPr').value.trim(),addr:$('pAddr').value.trim(),code:$('pCode').value.trim(),ph:$('pPh').value.trim(),logo:D.prof.logo||''};save();render();alert('સાચવ્યું ✔️')};
+/* 60-40 */
+function calc(){var a=parseFloat($('cAmt').value)||0,c=Math.round(a*60)/100,s=Math.round((a-c)*100)/100;$('c60').textContent=m(c);$('c40').textContent=m(s);$('cTot').textContent=m(a)}
+$('cAmt').addEventListener('input',calc);
+$('cGo').onclick=function(){$('gAmt').value=$('cAmt').value;document.querySelector('[data-t=gr]').click()};
+/* google drive: share sheet (mobile) or download + open Drive */
+$('bkDrive').onclick=async function(){var nm='grant_hisab_backup_'+today()+'.json',tx=JSON.stringify(D);
+ for(var t of ['application/json','text/plain']){try{var f=new File([tx],nm,{type:t});if(navigator.canShare&&navigator.canShare({files:[f]})){await navigator.share({files:[f],title:'ગ્રાન્ટ હિસાબ બેકઅપ'});return}}catch(e){if(e&&e.name==='AbortError')return}}
+ $('bkDl').click();window.open('https://drive.google.com/drive/my-drive','_blank');alert('બેકઅપ ફાઈલ ડાઉનલોડ થઈ. ખુલેલા Google Drive માં "New → File upload" થી એ ફાઈલ અપલોડ કરો.')};
+/* print / pdf with title page */
+function tpFill(){var p=D.prof,b=document.querySelector('.tabs button.on'),sec=b?b.textContent.replace(/^\S+\s*/,''):'';
+ if(b&&b.dataset.t==='led'&&$('lHead').value)sec+=' – '+$('lHead').value;
+ var l2=[p.code?'UDISE/કોડ: '+esc(p.code):'',p.ph?'ફોન: '+esc(p.ph):''].filter(Boolean).join(' &nbsp;|&nbsp; ');
+ $('lpH').innerHTML='<div class="lh">'+(p.logo?'<img src="'+p.logo+'">':'<span></span>')+'<div class="lhc"><div class="lh1">'+esc(p.school||'')+'</div>'+(p.addr?'<div>'+esc(p.addr)+'</div>':'')+(l2?'<div>'+l2+'</div>':'')+'</div><span></span></div><div class="lrule"></div>';
+ $('lpT').innerHTML='<div class="ttl">ગ્રાન્ટ ખર્ચ હિસાબ – '+esc(sec)+'</div><div class="dtl">તારીખ: '+dt(today())+'</div>';
+ $('lpS').innerHTML=(p.principal||p.school)?'<div class="sg">'+(p.principal?esc(p.principal)+'<br>':'')+esc(rl())+(p.school?'<br>'+esc(p.school):'')+'</div>':'';
+ return sec}
+function toast(t){var e=$('toast');e.textContent=t;e.style.display='block';setTimeout(function(){e.style.display='none'},4500)}
+function doPrint(){tpFill();window.print()}
+function doPdf(){var sec=tpFill(),o=document.title;document.title='ગ્રાન્ટ હિસાબ - '+sec;toast('Print વિન્ડોમાં Destination / પ્રિન્ટર માં "Save as PDF" પસંદ કરો');setTimeout(function(){window.print();document.title=o},500)}
+['sum','gr','ex','led','calc'].forEach(function(k){$('p-'+k).insertAdjacentHTML('afterbegin','<div class="tools noprint"><button class="btn gold" onclick="doPrint()">🖨️ પ્રિન્ટ</button><button class="btn" onclick="doPdf()">📄 PDF</button></div>')});
+/* app: tab icons, install, offline */
+document.querySelectorAll('.tabs button').forEach(function(b){var t=b.textContent.trim(),i=t.search(/\s/);if(i>0)b.innerHTML='<span class="ei">'+t.slice(0,i)+'</span> '+t.slice(i+1)});
+var dip=null;window.addEventListener('beforeinstallprompt',function(e){e.preventDefault();dip=e;$('instBtn').style.display=''});
+$('instBtn').onclick=function(){if(dip){dip.prompt();dip=null;$('instBtn').style.display='none'}};
+window.addEventListener('appinstalled',function(){toast('✔️ App install થઈ ગઈ')});
+if('serviceWorker' in navigator&&/^https?:/.test(location.protocol))navigator.serviceWorker.register('sw.js').catch(function(){});
+setD('gDate',today());setD('eDate',today());loadPf();render();calc();if(!LS_OK)toast('⚠️ આ બ્રાઉઝરમાં ડેટા યાદ રહેશે નહીં – ફાઈલ Chrome માં ખોલો અને બેકઅપ લેતા રહો');
+</script>
+</body>
+</html>
