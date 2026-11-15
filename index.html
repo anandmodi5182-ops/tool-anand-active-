@@ -86,7 +86,7 @@ text-shadow:0 3px 0 var(--ink),0 6px 0 var(--ink),0 9px 0 var(--ink),0 16px 18px
 background:var(--c);border:3px solid var(--ink);box-shadow:0 6px 0 var(--ink),inset 0 4px 0 rgba(255,255,255,.45),inset 0 -4px 0 rgba(29,27,58,.12);transition:transform .08s,box-shadow .08s;-webkit-tap-highlight-color:transparent}
 .b3:hover{transform:translateY(-2px);box-shadow:0 8px 0 var(--ink),inset 0 4px 0 rgba(255,255,255,.45),inset 0 -4px 0 rgba(29,27,58,.12)}
 .b3:active{transform:translateY(6px);box-shadow:0 0 0 var(--ink)}
-.b3.demo{--c:#d9c8ff}.b3.buy{--c:var(--sun)}.b3.dl{--c:var(--mint)}.b3.wa{--c:#25d366}
+.pv{position:relative;display:block;margin:2px 0 12px;border:3px solid var(--ink);border-radius:16px;overflow:hidden;cursor:zoom-in;background:#fff;box-shadow:0 4px 0 var(--ink);transform:translateZ(18px)}.pv img{display:block;width:100%;aspect-ratio:16/9;object-fit:cover;object-position:top}.pv span{position:absolute;right:8px;bottom:8px;background:var(--ink);color:#fff;font-size:12px;font-weight:700;padding:4px 10px;border-radius:20px}#lb{position:fixed;inset:0;z-index:99999;background:#0b0630e6;display:none;place-items:center;padding:14px;cursor:zoom-out}#lb.on{display:grid}#lb figure{margin:0;max-width:min(1000px,96vw);text-align:center;color:#fff}#lb img{max-width:100%;max-height:78vh;border-radius:14px;border:4px solid #fff}#lb b{display:block;margin-top:10px;font-size:1.05rem}.b3.demo{--c:#d9c8ff}.b3.buy{--c:var(--sun)}.b3.dl{--c:var(--mint)}.b3.wa{--c:#25d366}
 .b3.big{flex:none;width:100%}
 
 .ov{position:fixed;inset:0;z-index:50;display:none;align-items:center;justify-content:center;padding:16px;background:rgba(29,27,58,.6)}
@@ -157,6 +157,7 @@ footer{text-align:center;margin-top:44px;padding:16px;border-radius:20px;backgro
 <div class="ov" id="ov"><div class="md" id="md"></div></div>
 <div class="toast" id="toast"></div>
 
+<div id="lb"><figure><img alt=""><b></b></figure></div>
 <script>
 /* ===== સેટિંગ્સ: અહીંથી કિંમત અને ફાઇલના નામ બદલો ===== */
 var UPI='9427914014@slc', PAYEE='MR MODI ANANDBHAI', WA='919427914014';
@@ -169,6 +170,7 @@ var TOOLS=[
  {n:'ગ્રાન્ટ ખર્ચ હિસાબ',d:'શાળા ગ્રાન્ટ · ખર્ચ · ખાતાવહી · 60-40 ગણતરી · બેકઅપ',i:'💰',t:'web',f:'GRANT_HISAB.html',k:'grant-hisab',p:0},
  {n:'ગુજરાતી પંચાંગ વૉલપેપર',d:'પંચાંગ વૉલપેપર બનાવો',i:'🗓️',t:'web',f:'panchang_wallpaper_AUTO_READY.html',k:'panchang-wallpaper',p:0},
  {n:'ઓરોરા રિમાઇન્ડર',d:'રિમાઇન્ડર ટૂલ',i:'⏰',t:'web',f:'aurora_reminder_shri_anandbhai_modi.html',free:true},
+ {n:'લેટરપેડ અને ફાઇલ ટાઇટલ પેજ મેકર',d:'CRC લેટરપેડ · ફાઇલ ટાઇટલ પેજ · PDF / પ્રિન્ટ',i:'📃',t:'web',f:'LETTERPAD_TITLEPAGE_MAKER.html',k:'letterpad',free:true},
  {n:'ComputerCheck',d:'PC ચેક પ્રોગ્રામ (Windows)',i:'💻',t:'exe',f:'ComputerCheck.exe',k:'computercheck',p:0},
  {n:'Office Order Full',d:'ફુલ પ્રોગ્રામ (Windows)',i:'📦',t:'exe',f:'Office_Order_Full.exe',k:'office-order-full',p:0},
  {n:'PC Cleaner',d:'PC સાફ કરવાનો પ્રોગ્રામ',i:'🧹',t:'exe',f:'PC_Cleaner.exe',k:'pc-cleaner',p:0}
@@ -213,6 +215,9 @@ setInterval(function(){TOOLS.forEach(function(t){if(gated(t)&&(curTool===t||pend
 setInterval(function(){TOOLS.forEach(check)},60000);
 document.addEventListener('visibilitychange',function(){if(!document.hidden)TOOLS.forEach(check)});
 
+function pk(t){return t.k||t.f.replace(/\.\w+$/,'')}
+function pv(t){return '<div class="pv" data-pv="'+pk(t)+'" data-n="'+t.n+'"><img loading="lazy" alt="Preview" src="previews/'+pk(t)+'.jpg" onerror="this.parentNode.remove()"><span>🔍 Preview</span></div>'}
+function lbOpen(s,n){var l=$('lb');l.querySelector('img').src=s;l.querySelector('b').textContent=n;l.classList.add('on')}
 function render(f){
  curF=f;
  $('grid').innerHTML=TOOLS.map(function(t,i){
@@ -223,7 +228,7 @@ function render(f){
   var buy=t.free||okk?'':'<button class="b3 buy big" data-i="'+i+'">🛒 ખરીદો</button>';
   var feat=t.k==='office-order'?' featured':'';
   var badge=t.k==='office-order'?'<span class="badge-new">LATEST 5.6</span>':'';
-  return '<div class="card'+feat+'">'+badge+'<span class="ic">'+t.i+'</span><h3>'+t.n+'</h3><p>'+t.d+'</p><div class="tags"><span class="tag'+(t.free?' f':'')+'">'+(t.t==='exe'?'Windows':'Online')+'</span>'+(gated(t)&&okk?'<span class="tag ok">✅ Approved</span>':'')+(t.free?'<span class="tag f">મફત</span>':'')+'</div><div class="pr">'+price(t)+'</div><div class="row">'+open+demo+buy+'</div></div>'}).join('');
+  return '<div class="card'+feat+'">'+badge+'<span class="ic">'+t.i+'</span><h3>'+t.n+'</h3><p>'+t.d+'</p>'+pv(t)+'<div class="tags"><span class="tag'+(t.free?' f':'')+'">'+(t.t==='exe'?'Windows':'Online')+'</span>'+(gated(t)&&okk?'<span class="tag ok">✅ Approved</span>':'')+(t.free?'<span class="tag f">મફત</span>':'')+'</div><div class="pr">'+price(t)+'</div><div class="row">'+open+demo+buy+'</div></div>'}).join('');
  tilt();
 }
 $('chips').onclick=function(e){var b=e.target.closest('.chip');if(!b)return;document.querySelectorAll('.chip').forEach(function(c){c.classList.remove('on')});b.classList.add('on');render(b.dataset.f)};
@@ -242,10 +247,12 @@ function go(t,dl){
    if(dl)save(u);else location.href=u
   }).catch(nx)})()}
 $('grid').onclick=function(e){
+ var pvb=e.target.closest('[data-pv]');if(pvb){lbOpen(pvb.querySelector('img').src,pvb.dataset.n);return}
  var dm=e.target.closest('[data-demo]');if(dm){e.preventDefault();var T=TOOLS[dm.dataset.demo];go({f:T.f.replace(/\.html$/i,'_DEMO.html'),t:'web',n:T.n+' Demo'},false);return}
  var g=e.target.closest('[data-go]');if(g){e.preventDefault();go(TOOLS[g.dataset.go],!!g.dataset.dl);return}
  var b=e.target.closest('.buy');if(b)buy(TOOLS[b.dataset.i])};
 
+$('lb').onclick=function(){this.classList.remove('on')};document.addEventListener('keydown',function(e){if(e.key==='Escape')$('lb').classList.remove('on')});
 /* 3D tilt */
 function tilt(){
  if(!matchMedia('(hover:hover) and (pointer:fine)').matches)return;

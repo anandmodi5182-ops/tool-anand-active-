@@ -122,37 +122,9 @@ document.getElementById('dgCp').onclick=function(){var b=this;function d(){b.tex
 document.getElementById('dgOpen').onclick=show;
 var x=document.getElementById('dgX');if(x)x.onclick=hide;
 if(expired){bar.style.display='none';show()}
-})({"name":"ગુજરાતી પંચાંગ વૉલપેપર","key":"panchang_wallpaper_AUTO_READY","max":2});</script>
-<script>
-/* LICENSE GUARD v2  */
-var H=function H(s,seed){seed=seed||0;var a=0xdeadbeef^seed,b=0x41c6ce57^seed,c,i;for(i=0;i<s.length;i++){c=s.charCodeAt(i);a=Math.imul(a^c,2654435761);b=Math.imul(b^c,1597334677)}
-a=Math.imul(a^(a>>>16),2246822507)^Math.imul(b^(b>>>13),3266489909);b=Math.imul(b^(b>>>16),2246822507)^Math.imul(a^(a>>>13),3266489909);return 4294967296*(2097151&b)+(a>>>0)};
-(function guardMain(c,H){
- var K='lic2_'+c.t,DB=(c.db||'').replace(/\/+$/,'');
- function hex(n){return n.toString(16).toUpperCase().padStart(14,'0')}
- function td(){var d=new Date();return ''+d.getFullYear()+('0'+(d.getMonth()+1)).slice(-2)+('0'+d.getDate()).slice(-2)}
- function good(v){if(typeof v!=='string')return false;var p=v.split('|');return p[0]==='1'&&(p[1]==='00000000'||td()<=p[1])}
- function code(){var u=navigator.userAgent,f=/Edg\//.test(u)?'edge':/OPR\//.test(u)?'opera':/Firefox\//.test(u)?'ff':/Chrome\//.test(u)?'chrome':/Safari\//.test(u)?'safari':'x',g='';
-  try{var x=document.createElement('canvas').getContext('webgl'),e=x.getExtension('WEBGL_debug_renderer_info');g=x.getParameter(e.UNMASKED_RENDERER_WEBGL)}catch(e){}
-  return hex(H([f,navigator.platform,navigator.hardwareConcurrency||0,g].join('|'),7)).slice(0,12).match(/.{4}/g).join('-')}
- var cd=code(),id=c.t+'_'+cd;
- function ask(){return fetch(DB+'/approved/'+id+'/v.json?t='+Date.now(),{cache:'no-store'}).then(function(r){if(!r.ok)throw 0;return r.json()})}
- function cache(){try{return localStorage.getItem(K)}catch(e){return null}}
- function put(v){try{v?localStorage.setItem(K,v):localStorage.removeItem(K)}catch(e){}}
- function watch(){setInterval(function(){ask().then(function(v){if(good(v))put(v);else{put(null);location.reload()}}).catch(function(){})},60000)}
- function lock(){
-  var o=document.createElement('div');o.id='__lic';
-  o.style.cssText='position:fixed;inset:0;z-index:2147483647;background:radial-gradient(circle at 30% 20%,#2a1f6b,#070b1a 70%);display:flex;align-items:center;justify-content:center;padding:18px;font-family:sans-serif;color:#eef1ff';
-  o.innerHTML='<style>@keyframes lp{from{opacity:0;transform:scale(.88)}}@keyframes lr{to{transform:rotate(360deg)}}@keyframes lb{50%{opacity:.3}}#__lic button{font:inherit;border-radius:12px;padding:12px;border:1px solid rgba(255,255,255,.2)}</style><div style="width:min(480px,100%);text-align:center;padding:30px;border-radius:24px;background:rgba(255,255,255,.07);border:1px solid rgba(255,255,255,.18);backdrop-filter:blur(14px);animation:lp .6s cubic-bezier(.2,1.3,.4,1)"><div style="font-size:54px;display:inline-block;animation:lr 6s linear infinite">🔒</div><h2 style="margin:10px 0 6px">આ ટૂલ લોક છે</h2><p style="color:#97a0c7;line-height:1.6;font-size:.95rem">આ ટૂલ વાપરવા માટે નીચેનો Access Code મોકલીને Activation મેળવો.<br><b style="color:#ffb938">SHRI ANANDBHAI MODI · '+c.p+'</b></p><div style="margin:16px 0 6px;font-size:.8rem;color:#97a0c7">તમારો Access Code</div><div style="padding:12px;border-radius:12px;background:rgba(0,0,0,.4);border:1px dashed #2de2c4;color:#2de2c4;font-size:1.25rem;letter-spacing:2px">'+cd+'</div><div style="display:flex;gap:8px;margin:12px 0;justify-content:center;flex-wrap:wrap"><button id="__cp" style="background:#1d2447;color:#fff;cursor:pointer">📋 Copy</button><a target="_blank" href="https://wa.me/91'+c.p+'?text='+encodeURIComponent('Activation જોઈએ છે. ટૂલ: '+c.n+' | Access Code: '+cd)+'" style="background:#25d366;color:#052;padding:12px 16px;border-radius:12px;text-decoration:none;font-weight:600">WhatsApp</a></div><div id="__s" style="color:#ffd990;font-size:.9rem;margin-top:6px"><span style="animation:lb 1.4s infinite;display:inline-block">⏳</span> Activation ની રાહ જુઓ… થતાં જ આ ટૂલ આપોઆપ ખૂલી જશે</div></div>';
-  document.documentElement.appendChild(o);document.documentElement.style.overflow='hidden';
-  o.querySelector('#__cp').onclick=function(){navigator.clipboard&&navigator.clipboard.writeText(cd);this.textContent='✔ Copied'};
-  if(/__FIREBASE/.test(DB)||!DB)o.querySelector('#__s').textContent='⚠ Admin ની Database URL સેટ નથી.';
-  var iv=setInterval(function(){ask().then(function(v){if(good(v)){put(v);window.__licOK=1;clearInterval(iv);o.remove();document.documentElement.style.overflow='';watch()}}).catch(function(){})},3000);
-  setInterval(function(){if(!document.getElementById('__lic')&&!window.__licOK)location.reload()},1000)}
- function run(){if(good(cache())){window.__licOK=1;watch();return}lock()}
- if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',run);else run();
-})({"t": "panchang", "n": "ગુજરાતી પંચાંગ વૉલપેપર", "p": "9427914014", "db": "https://anand-tools-default-rtdb.asia-southeast1.firebasedatabase.app"},H);
-</script>
+}
+)({"name": "ગુજરાતી પંચાંગ વૉલપેપર", "key": "panchang_wallpaper_AUTO_READY", "max": 2});</script>
+
 
 <div class="strip t"></div><div class="strip b"></div>
 <div id="app">
